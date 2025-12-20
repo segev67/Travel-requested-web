@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Visit Paris - France</title>
+
+  <!-- Leaflet CSS (map library) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    /* Basic dark theme styling */
+    :root { --bg:#0b1220; --card:#121b2f; --text:#e8edf7; --muted:#a8b3cf; --accent:#7c5cff; }
+    body{
+      margin:0;
+      font-family:system-ui, Arial;
+      background:linear-gradient(180deg,#0b1220,#0a0f1c);
+      color:var(--text);
+    }
+    header{ padding:28px 20px; max-width:1100px; margin:0 auto; }
+    .title{ font-size:34px; margin:0 0 8px; }
+    .subtitle{ color:var(--muted); margin:0; line-height:1.5; }
+
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 28px;
+      display:grid;
+      gap:18px;
+    }
+
+    /* 3 images layout: 1 large + 2 small */
+    .hero{ display:grid; grid-template-columns: 2fr 1fr; gap:12px; }
+    .hero img{ width:100%; height:320px; object-fit:cover; border-radius:18px; }
+    .hero .col img{ height:154px; }
+
+    .section{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    h2{ margin:0 0 10px; font-size:20px; }
+    ul{ list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card-head{ display:flex; gap:10px; align-items:center; }
+    .badge{
+      background:rgba(124,92,255,0.2);
+      border:1px solid rgba(124,92,255,0.35);
+      color:#dcd6ff;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .coords{ color:var(--muted); font-size:12px; margin:10px 0 0; }
+
+    /* Map container */
+    #map{ height:420px; border-radius:16px; overflow:hidden; }
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 30px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Visit Paris, France</h1>
+    <p class="subtitle">Paris, the capital of France, is known for its stunning architecture, art museums, and romantic atmosphere. The city is famous for its iconic landmarks, fashion designers, and delicious cuisine. Visitors can explore the city's historic center, visit famous museums, and enjoy the city's vibrant nightlife.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Images section -->
+    <div class="hero section">
+      <img src="https://source.unsplash.com/featured/1200x700/?Eiffel%20Tower" alt="Paris image 1">
+      <div class="col">
+        <img src="https://source.unsplash.com/featured/1200x700/?Seine%20River" alt="Paris image 2">
+        <img src="https://source.unsplash.com/featured/1200x700/?French%20cuisine" alt="Paris image 3">
+      </div>
+    </div>
+
+    <!-- Attractions list -->
+    <div class="section">
+      <h2>Top attractions</h2>
+      <ul>
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#1</span>
+      <h3>The Eiffel Tower</h3>
+    </div>
+    <p>The Eiffel Tower is an iconic iron lattice tower and one of the most recognizable landmarks in the world. It offers stunning views of the city from its observation decks.</p>
+    <p class="coords">📍 48.8583, 2.2945</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#2</span>
+      <h3>The Louvre Museum</h3>
+    </div>
+    <p>The Louvre Museum is one of the world's largest and most famous museums, housing an impressive collection of art and artifacts from around the world.</p>
+    <p class="coords">📍 48.8607, 2.2945</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#3</span>
+      <h3>Notre-Dame Cathedral</h3>
+    </div>
+    <p>Notre-Dame Cathedral is a beautiful and historic Catholic cathedral that was built in the 12th century and is one of the most famous landmarks in Paris.</p>
+    <p class="coords">📍 48.8567, 2.3508</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#4</span>
+      <h3>Arc de Triomphe</h3>
+    </div>
+    <p>The Arc de Triomphe is a monumental arch that honors the soldiers who fought and died for France, and offers stunning views of the city from its rooftop.</p>
+    <p class="coords">📍 48.8739, 2.295</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#5</span>
+      <h3>Montmartre</h3>
+    </div>
+    <p>Montmartre is a charming and historic neighborhood that is famous for its bohemian vibe, street artists, and stunning views of the city.</p>
+    <p class="coords">📍 48.8867, 2.3408</p>
+  </li>
+</ul>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <h2>Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    Generated automatically with AI + n8n. Images via Unsplash (featured search endpoint).
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    // Attractions data from the AI (embedded as JSON)
+    const attractions = [{"name":"The Eiffel Tower","shortDescription":"The Eiffel Tower is an iconic iron lattice tower and one of the most recognizable landmarks in the world. It offers stunning views of the city from its observation decks.","lat":48.8583,"lng":2.2945},{"name":"The Louvre Museum","shortDescription":"The Louvre Museum is one of the world's largest and most famous museums, housing an impressive collection of art and artifacts from around the world.","lat":48.8607,"lng":2.2945},{"name":"Notre-Dame Cathedral","shortDescription":"Notre-Dame Cathedral is a beautiful and historic Catholic cathedral that was built in the 12th century and is one of the most famous landmarks in Paris.","lat":48.8567,"lng":2.3508},{"name":"Arc de Triomphe","shortDescription":"The Arc de Triomphe is a monumental arch that honors the soldiers who fought and died for France, and offers stunning views of the city from its rooftop.","lat":48.8739,"lng":2.295},{"name":"Montmartre","shortDescription":"Montmartre is a charming and historic neighborhood that is famous for its bohemian vibe, street artists, and stunning views of the city.","lat":48.8867,"lng":2.3408}];
+
+    // Create the map and center it on the first attraction (fallback to 0,0)
+    const map = L.map('map').setView([48.8583, 2.2945], 12);
+
+    // OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add a marker for each attraction
+    attractions.forEach(a => {
+      if (typeof a.lat === "number" && typeof a.lng === "number") {
+        L.marker([a.lat, a.lng]).addTo(map)
+          .bindPopup('<b>' + a.name + '</b><br/>' + a.shortDescription);
+      }
+    });
+  </script>
+</body>
+</html>
