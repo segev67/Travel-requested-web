@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Visit Tel Aviv</title>
+
+  <!-- Leaflet CSS (map library) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    :root { --bg:#0b1220; --card:#121b2f; --text:#e8edf7; --muted:#a8b3cf; --accent:#7c5cff; }
+    body{
+      margin:0;
+      font-family:system-ui, Arial;
+      background:linear-gradient(180deg,#0b1220,#0a0f1c);
+      color:var(--text);
+    }
+    header{ padding:28px 20px; max-width:1100px; margin:0 auto; }
+    .title{ font-size:34px; margin:0 0 8px; }
+    .subtitle{ color:var(--muted); margin:0; line-height:1.5; }
+
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 28px;
+      display:grid;
+      gap:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    h2{ margin:0 0 10px; font-size:20px; }
+    ul{ list-style:none; padding:0; margin:0; display:grid; gap:16px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card-head{ display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+    .badge{
+      background:rgba(124,92,255,0.2);
+      border:1px solid rgba(124,92,255,0.35);
+      color:#dcd6ff;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .card-image{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-bottom:8px;
+    }
+    .coords{ color:var(--muted); font-size:12px; margin:10px 0 0; }
+
+    #map{ height:420px; border-radius:16px; overflow:hidden; }
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 30px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Visit Tel Aviv</h1>
+    <p class="subtitle">Tel Aviv is a vibrant city located on the Mediterranean coast of Israel, known for its beautiful beaches, rich history, and thriving cultural scene. The city offers a unique blend of modern and ancient attractions, from the historic Old City of Jaffa to the trendy neighborhoods of Neve Tzedek and Florentin. Visitors can enjoy the city's stunning beaches, explore its many museums and art galleries, and experience the local cuisine and nightlife.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Attractions list with images -->
+    <div class="section">
+      <h2>Top attractions</h2>
+      <ul>
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#1</span>
+      <h3>Carmel Market</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Carmel%20Market%20Tel%20Aviv" alt="Carmel Market in Tel Aviv">
+    <p>The Carmel Market, also known as Shuk HaCarmel, is a bustling marketplace in the heart of Tel Aviv, offering a wide range of fresh produce, spices, and souvenirs. Visitors can sample local delicacies, such as falafel and shawarma, and browse the many stalls selling everything from jewelry to clothing. The market is a great place to experience the sights, sounds, and smells of Tel Aviv's vibrant culture. The market is open every day except Saturday, and it's a great place to pick up some unique gifts or souvenirs. With its lively atmosphere and wide range of products, the Carmel Market is a must-visit destination for anyone traveling to Tel Aviv.</p>
+    <p class="coords">📍 32.061111, 34.768611</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#2</span>
+      <h3>Tel Aviv Museum of Art</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Tel%20Aviv%20Museum%20of%20Art%20Tel%20Aviv" alt="Tel Aviv Museum of Art in Tel Aviv">
+    <p>The Tel Aviv Museum of Art is one of the largest and most important art museums in Israel, featuring a diverse collection of Israeli and international art. The museum's collection includes works by artists such as Monet, Van Gogh, and Picasso, as well as a wide range of contemporary Israeli art. The museum's building itself is also a work of art, with a stunning architecture that combines modern and traditional elements. Visitors can explore the museum's many galleries and exhibitions, and enjoy the beautiful gardens and outdoor spaces. With its world-class collection and beautiful setting, the Tel Aviv Museum of Art is a must-visit destination for art lovers.</p>
+    <p class="coords">📍 32.077222, 34.786111</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#3</span>
+      <h3>Jaffa Old City</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Jaffa%20Old%20City%20Tel%20Aviv" alt="Jaffa Old City in Tel Aviv">
+    <p>The Jaffa Old City is a historic neighborhood located on the southern edge of Tel Aviv, with a rich history dating back thousands of years. The neighborhood is filled with narrow streets, charming shops, and beautiful architecture, including the famous Jaffa Clock Tower. Visitors can explore the many art galleries and studios, and enjoy the stunning views of the Mediterranean Sea. The Jaffa Old City is also home to a wide range of restaurants and cafes, serving everything from traditional Middle Eastern cuisine to modern Israeli dishes. With its unique blend of history, culture, and natural beauty, the Jaffa Old City is a must-visit destination for anyone traveling to Tel Aviv.</p>
+    <p class="coords">📍 32.054722, 34.751667</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#4</span>
+      <h3>Palmach Museum</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Palmach%20Museum%20Tel%20Aviv" alt="Palmach Museum in Tel Aviv">
+    <p>The Palmach Museum is a unique museum located in Tel Aviv, dedicated to the history of the Palmach, the elite fighting force of the Haganah, the Jewish paramilitary organization that played a key role in the establishment of the State of Israel. The museum features a wide range of exhibits and artifacts, including personal stories, photographs, and historical documents, that tell the story of the Palmach and its bravery during the 1948 Arab-Israeli War. Visitors can explore the museum's many interactive exhibits, and learn about the history and significance of the Palmach. The museum is a great place to learn about Israel's history and culture, and to understand the country's complex and fascinating past. With its engaging exhibits and personal stories, the Palmach Museum is a must-visit destination for history buffs and anyone interested in learning more about Israel.</p>
+    <p class="coords">📍 32.073611, 34.794167</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#5</span>
+      <h3>Frishman Beach</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Frishman%20Beach%20Tel%20Aviv" alt="Frishman Beach in Tel Aviv">
+    <p>Frishman Beach is one of the most popular beaches in Tel Aviv, known for its beautiful sand, clear waters, and lively atmosphere. The beach is located in the heart of the city, within walking distance of many hotels and restaurants, and offers a wide range of amenities, including sun loungers, umbrellas, and water sports. Visitors can enjoy swimming, sunbathing, and relaxing on the beach, or try their hand at surfing, kayaking, or paddleboarding. The beach is also a great place to watch the sunset, with stunning views of the Mediterranean Sea. With its beautiful setting and wide range of activities, Frishman Beach is a must-visit destination for anyone traveling to Tel Aviv.</p>
+    <p class="coords">📍 32.072222, 34.766111</p>
+  </li>
+</ul>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <h2>Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    Generated automatically with AI + n8n.
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const attractions = [{"name":"Carmel Market","shortDescription":"The Carmel Market, also known as Shuk HaCarmel, is a bustling marketplace in the heart of Tel Aviv, offering a wide range of fresh produce, spices, and souvenirs. Visitors can sample local delicacies, such as falafel and shawarma, and browse the many stalls selling everything from jewelry to clothing. The market is a great place to experience the sights, sounds, and smells of Tel Aviv's vibrant culture. The market is open every day except Saturday, and it's a great place to pick up some unique gifts or souvenirs. With its lively atmosphere and wide range of products, the Carmel Market is a must-visit destination for anyone traveling to Tel Aviv.","lat":32.061111,"lng":34.768611},{"name":"Tel Aviv Museum of Art","shortDescription":"The Tel Aviv Museum of Art is one of the largest and most important art museums in Israel, featuring a diverse collection of Israeli and international art. The museum's collection includes works by artists such as Monet, Van Gogh, and Picasso, as well as a wide range of contemporary Israeli art. The museum's building itself is also a work of art, with a stunning architecture that combines modern and traditional elements. Visitors can explore the museum's many galleries and exhibitions, and enjoy the beautiful gardens and outdoor spaces. With its world-class collection and beautiful setting, the Tel Aviv Museum of Art is a must-visit destination for art lovers.","lat":32.077222,"lng":34.786111},{"name":"Jaffa Old City","shortDescription":"The Jaffa Old City is a historic neighborhood located on the southern edge of Tel Aviv, with a rich history dating back thousands of years. The neighborhood is filled with narrow streets, charming shops, and beautiful architecture, including the famous Jaffa Clock Tower. Visitors can explore the many art galleries and studios, and enjoy the stunning views of the Mediterranean Sea. The Jaffa Old City is also home to a wide range of restaurants and cafes, serving everything from traditional Middle Eastern cuisine to modern Israeli dishes. With its unique blend of history, culture, and natural beauty, the Jaffa Old City is a must-visit destination for anyone traveling to Tel Aviv.","lat":32.054722,"lng":34.751667},{"name":"Palmach Museum","shortDescription":"The Palmach Museum is a unique museum located in Tel Aviv, dedicated to the history of the Palmach, the elite fighting force of the Haganah, the Jewish paramilitary organization that played a key role in the establishment of the State of Israel. The museum features a wide range of exhibits and artifacts, including personal stories, photographs, and historical documents, that tell the story of the Palmach and its bravery during the 1948 Arab-Israeli War. Visitors can explore the museum's many interactive exhibits, and learn about the history and significance of the Palmach. The museum is a great place to learn about Israel's history and culture, and to understand the country's complex and fascinating past. With its engaging exhibits and personal stories, the Palmach Museum is a must-visit destination for history buffs and anyone interested in learning more about Israel.","lat":32.073611,"lng":34.794167},{"name":"Frishman Beach","shortDescription":"Frishman Beach is one of the most popular beaches in Tel Aviv, known for its beautiful sand, clear waters, and lively atmosphere. The beach is located in the heart of the city, within walking distance of many hotels and restaurants, and offers a wide range of amenities, including sun loungers, umbrellas, and water sports. Visitors can enjoy swimming, sunbathing, and relaxing on the beach, or try their hand at surfing, kayaking, or paddleboarding. The beach is also a great place to watch the sunset, with stunning views of the Mediterranean Sea. With its beautiful setting and wide range of activities, Frishman Beach is a must-visit destination for anyone traveling to Tel Aviv.","lat":32.072222,"lng":34.766111}];
+
+    const map = L.map('map').setView([32.061111, 34.768611], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    attractions.forEach(a => {
+      if (typeof a.lat === "number" && typeof a.lng === "number") {
+        L.marker([a.lat, a.lng]).addTo(map)
+          .bindPopup('<b>' + a.name + '</b><br/>' + a.shortDescription);
+      }
+    });
+  </script>
+</body>
+</html>
