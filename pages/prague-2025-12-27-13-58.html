@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Visit Prague</title>
+
+  <!-- Leaflet CSS (map library) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    :root { --bg:#0b1220; --card:#121b2f; --text:#e8edf7; --muted:#a8b3cf; --accent:#7c5cff; }
+    body{
+      margin:0;
+      font-family:system-ui, Arial;
+      background:linear-gradient(180deg,#0b1220,#0a0f1c);
+      color:var(--text);
+    }
+    header{ padding:28px 20px; max-width:1100px; margin:0 auto; }
+    .title{ font-size:34px; margin:0 0 8px; }
+    .subtitle{ color:var(--muted); margin:0; line-height:1.5; }
+
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 28px;
+      display:grid;
+      gap:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    h2{ margin:0 0 10px; font-size:20px; }
+    ul{ list-style:none; padding:0; margin:0; display:grid; gap:16px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card-head{ display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+    .badge{
+      background:rgba(124,92,255,0.2);
+      border:1px solid rgba(124,92,255,0.35);
+      color:#dcd6ff;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .card-image{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-bottom:8px;
+    }
+    .coords{ color:var(--muted); font-size:12px; margin:10px 0 0; }
+
+    #map{ height:420px; border-radius:16px; overflow:hidden; }
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 30px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Visit Prague</h1>
+    <p class="subtitle">Prague is the capital and largest city of the Czech Republic, known for its stunning architecture, rich history, and vibrant cultural scene. The city is home to many famous landmarks, including the Charles Bridge and St. Vitus Cathedral. Visitors can explore the city's historic center, a UNESCO World Heritage Site, and enjoy the city's lively atmosphere.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Attractions list with images -->
+    <div class="section">
+      <h2>Top attractions</h2>
+      <ul>
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#1</span>
+      <h3>Charles Bridge</h3>
+    </div>
+    <img class="card-image" src="https://source.unsplash.com/480x280/?Charles%20Bridge%20Prague" alt="Charles Bridge in Prague">
+    <p>The Charles Bridge is a historic stone bridge that spans the Vltava River, connecting the Old Town with the Lesser Town. The bridge is adorned with 30 statues of saints and is a popular spot for street performers and artists. Visitors can walk across the bridge and take in the stunning views of the river and the city. The bridge is also a great place to watch the sunset, as the sky turns pink and orange behind the statues. At night, the bridge is beautifully lit up, making it a romantic spot for couples.</p>
+    <p class="coords">📍 50.0867, 14.4157</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#2</span>
+      <h3>St. Vitus Cathedral</h3>
+    </div>
+    <img class="card-image" src="https://source.unsplash.com/480x280/?St.%20Vitus%20Cathedral%20Prague" alt="St. Vitus Cathedral in Prague">
+    <p>St. Vitus Cathedral is a stunning Gothic cathedral located within the Prague Castle complex. The cathedral is dedicated to St. Vitus, the patron saint of Bohemia, and features intricate stone carvings, stunning stained glass windows, and a beautiful rose window. Visitors can climb to the top of the cathedral's south tower for breathtaking views of the city. The cathedral is also home to the tombs of many Bohemian kings and nobles, making it a fascinating historical site. The cathedral's architecture is a masterpiece of Gothic design, with soaring vaults and delicate ribbing.</p>
+    <p class="coords">📍 50.0755, 14.4014</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#3</span>
+      <h3>Old Town Square</h3>
+    </div>
+    <img class="card-image" src="https://source.unsplash.com/480x280/?Old%20Town%20Square%20Prague" alt="Old Town Square in Prague">
+    <p>Old Town Square is the heart of Prague's historic center, a vibrant public space that has been the site of many significant events throughout the city's history. The square is home to the famous Astronomical Clock, which dates back to the 15th century and features intricate stone carvings and animated figures. Visitors can also see the stunning St. Nicholas Church, a beautiful Baroque church with a striking tower. The square is surrounded by charming cafes and shops, making it a great place to relax and people-watch. At night, the square is beautifully lit up, with the clock tower and church illuminated against the night sky.</p>
+    <p class="coords">📍 50.0878, 14.4205</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#4</span>
+      <h3>Prague Castle</h3>
+    </div>
+    <img class="card-image" src="https://source.unsplash.com/480x280/?Prague%20Castle%20Prague" alt="Prague Castle in Prague">
+    <p>Prague Castle is a vast complex of palaces, churches, and gardens that has been the seat of power for the rulers of Bohemia for centuries. The castle is home to many stunning buildings, including St. Vitus Cathedral, the Old Royal Palace, and the Basilica of St. George. Visitors can explore the castle's grand halls, chapels, and gardens, and see many historic artifacts and artworks on display. The castle is also home to the famous Golden Lane, a charming street lined with tiny houses that were once the homes of the castle's servants. The castle's architecture is a mix of styles, with Romanesque, Gothic, and Baroque elements.</p>
+    <p class="coords">📍 50.0911, 14.4017</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#5</span>
+      <h3>Wenceslas Square</h3>
+    </div>
+    <img class="card-image" src="https://source.unsplash.com/480x280/?Wenceslas%20Square%20Prague" alt="Wenceslas Square in Prague">
+    <p>Wenceslas Square is a large public square in the heart of Prague, named after the patron saint of Bohemia. The square is home to many important landmarks, including the National Museum, the State Opera, and the statue of St. Wenceslas. Visitors can walk up the square and take in the stunning views of the city, or visit one of the many cafes and restaurants that line the square. The square is also a popular spot for shopping, with many high-end boutiques and department stores. At night, the square is beautifully lit up, with the National Museum and State Opera building illuminated against the night sky.</p>
+    <p class="coords">📍 50.0789, 14.4294</p>
+  </li>
+</ul>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <h2>Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    Generated automatically with AI + n8n.
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const attractions = [{"name":"Charles Bridge","shortDescription":"The Charles Bridge is a historic stone bridge that spans the Vltava River, connecting the Old Town with the Lesser Town. The bridge is adorned with 30 statues of saints and is a popular spot for street performers and artists. Visitors can walk across the bridge and take in the stunning views of the river and the city. The bridge is also a great place to watch the sunset, as the sky turns pink and orange behind the statues. At night, the bridge is beautifully lit up, making it a romantic spot for couples.","lat":50.0867,"lng":14.4157},{"name":"St. Vitus Cathedral","shortDescription":"St. Vitus Cathedral is a stunning Gothic cathedral located within the Prague Castle complex. The cathedral is dedicated to St. Vitus, the patron saint of Bohemia, and features intricate stone carvings, stunning stained glass windows, and a beautiful rose window. Visitors can climb to the top of the cathedral's south tower for breathtaking views of the city. The cathedral is also home to the tombs of many Bohemian kings and nobles, making it a fascinating historical site. The cathedral's architecture is a masterpiece of Gothic design, with soaring vaults and delicate ribbing.","lat":50.0755,"lng":14.4014},{"name":"Old Town Square","shortDescription":"Old Town Square is the heart of Prague's historic center, a vibrant public space that has been the site of many significant events throughout the city's history. The square is home to the famous Astronomical Clock, which dates back to the 15th century and features intricate stone carvings and animated figures. Visitors can also see the stunning St. Nicholas Church, a beautiful Baroque church with a striking tower. The square is surrounded by charming cafes and shops, making it a great place to relax and people-watch. At night, the square is beautifully lit up, with the clock tower and church illuminated against the night sky.","lat":50.0878,"lng":14.4205},{"name":"Prague Castle","shortDescription":"Prague Castle is a vast complex of palaces, churches, and gardens that has been the seat of power for the rulers of Bohemia for centuries. The castle is home to many stunning buildings, including St. Vitus Cathedral, the Old Royal Palace, and the Basilica of St. George. Visitors can explore the castle's grand halls, chapels, and gardens, and see many historic artifacts and artworks on display. The castle is also home to the famous Golden Lane, a charming street lined with tiny houses that were once the homes of the castle's servants. The castle's architecture is a mix of styles, with Romanesque, Gothic, and Baroque elements.","lat":50.0911,"lng":14.4017},{"name":"Wenceslas Square","shortDescription":"Wenceslas Square is a large public square in the heart of Prague, named after the patron saint of Bohemia. The square is home to many important landmarks, including the National Museum, the State Opera, and the statue of St. Wenceslas. Visitors can walk up the square and take in the stunning views of the city, or visit one of the many cafes and restaurants that line the square. The square is also a popular spot for shopping, with many high-end boutiques and department stores. At night, the square is beautifully lit up, with the National Museum and State Opera building illuminated against the night sky.","lat":50.0789,"lng":14.4294}];
+
+    const map = L.map('map').setView([50.0867, 14.4157], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    attractions.forEach(a => {
+      if (typeof a.lat === "number" && typeof a.lng === "number") {
+        L.marker([a.lat, a.lng]).addTo(map)
+          .bindPopup('<b>' + a.name + '</b><br/>' + a.shortDescription);
+      }
+    });
+  </script>
+</body>
+</html>
