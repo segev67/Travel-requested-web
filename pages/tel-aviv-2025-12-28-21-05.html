@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Visit Tel Aviv</title>
+
+  <!-- Leaflet CSS (map library) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    :root { --bg:#0b1220; --card:#121b2f; --text:#e8edf7; --muted:#a8b3cf; --accent:#7c5cff; }
+    body{
+      margin:0;
+      font-family:system-ui, Arial;
+      background:linear-gradient(180deg,#0b1220,#0a0f1c);
+      color:var(--text);
+    }
+    header{ padding:28px 20px; max-width:1100px; margin:0 auto; }
+    .title{ font-size:34px; margin:0 0 8px; }
+    .subtitle{ color:var(--muted); margin:0; line-height:1.5; }
+
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 28px;
+      display:grid;
+      gap:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    h2{ margin:0 0 10px; font-size:20px; }
+    ul{ list-style:none; padding:0; margin:0; display:grid; gap:16px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card-head{ display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+    .badge{
+      background:rgba(124,92,255,0.2);
+      border:1px solid rgba(124,92,255,0.35);
+      color:#dcd6ff;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .card-image{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-bottom:8px;
+    }
+    .coords{ color:var(--muted); font-size:12px; margin:10px 0 0; }
+
+    #map{ height:420px; border-radius:16px; overflow:hidden; }
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 30px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Visit Tel Aviv</h1>
+    <p class="subtitle">Tel Aviv is a vibrant city known for its stunning beaches, rich history, and mouth-watering cuisine. Visitors can explore the city's many restaurants, cafes, and markets, or relax on the beautiful beaches along the Mediterranean coast. With its unique blend of modern and ancient culture, Tel Aviv is a must-visit destination for any traveler.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Attractions list with images -->
+    <div class="section">
+      <h2>Top attractions</h2>
+      <ul>
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#1</span>
+      <h3>Carmella Ba Nachala</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Carmella%20Ba%20Nachala%20Tel%20Aviv" alt="Carmella Ba Nachala in Tel Aviv">
+    <p>Carmella Ba Nachala is a popular restaurant in the heart of Tel Aviv, serving a wide range of delicious dishes made with fresh, locally-sourced ingredients. The restaurant's menu changes seasonally, but some popular items include their famous shakshuka, grilled meats, and fresh salads. With its cozy atmosphere and excellent service, Carmella Ba Nachala is a great place to enjoy a meal with friends or family. The restaurant is also known for its extensive wine list, featuring a variety of Israeli and international wines. Whether you're in the mood for a romantic dinner or a casual lunch, Carmella Ba Nachala is a great choice.</p>
+    <p class="coords">📍 32.0612, 34.7742</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#2</span>
+      <h3>The Old Man</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=The%20Old%20Man%20Tel%20Aviv" alt="The Old Man in Tel Aviv">
+    <p>The Old Man is a trendy restaurant and bar in the center of Tel Aviv, serving a unique blend of Asian-inspired dishes and craft cocktails. The restaurant's menu features a variety of small plates, including dumplings, noodles, and skewers, all made with fresh, high-quality ingredients. The Old Man is also known for its creative cocktails, made with house-made infusions and fresh juices. With its lively atmosphere and excellent service, The Old Man is a great place to grab a bite to eat or meet friends for drinks. The restaurant's decor is also worth noting, featuring a unique blend of vintage and modern elements.</p>
+    <p class="coords">📍 32.0653, 34.7823</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#3</span>
+      <h3>Miznon</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Miznon%20Tel%20Aviv" alt="Miznon in Tel Aviv">
+    <p>Miznon is a popular restaurant in Tel Aviv, serving a wide range of delicious street food-style dishes. The restaurant's menu features a variety of pitas, salads, and grilled meats, all made with fresh, locally-sourced ingredients. Miznon is also known for its creative take on traditional Israeli dishes, such as shawarma and falafel. With its casual atmosphere and excellent service, Miznon is a great place to grab a quick bite to eat or meet friends for lunch. The restaurant is also very affordable, making it a great option for travelers on a budget.</p>
+    <p class="coords">📍 32.0632, 34.7802</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#4</span>
+      <h3>HaBasta</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=HaBasta%20Tel%20Aviv" alt="HaBasta in Tel Aviv">
+    <p>HaBasta is a popular restaurant in the heart of Tel Aviv, serving a wide range of delicious dishes made with fresh, locally-sourced ingredients. The restaurant's menu changes seasonally, but some popular items include their famous salads, grilled meats, and fresh seafood. With its cozy atmosphere and excellent service, HaBasta is a great place to enjoy a romantic dinner or a night out with friends. The restaurant is also known for its extensive wine list, featuring a variety of Israeli and international wines. HaBasta's decor is also worth noting, featuring a unique blend of modern and rustic elements.</p>
+    <p class="coords">📍 32.0602, 34.7752</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#5</span>
+      <h3>Abraxas North</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Abraxas%20North%20Tel%20Aviv" alt="Abraxas North in Tel Aviv">
+    <p>Abraxas North is a popular restaurant in the north of Tel Aviv, serving a wide range of delicious dishes made with fresh, locally-sourced ingredients. The restaurant's menu features a variety of small plates, including salads, grilled meats, and seafood, all made with high-quality ingredients. Abraxas North is also known for its creative cocktails, made with house-made infusions and fresh juices. With its lively atmosphere and excellent service, Abraxas North is a great place to grab a bite to eat or meet friends for drinks. The restaurant's decor is also worth noting, featuring a unique blend of modern and industrial elements.</p>
+    <p class="coords">📍 32.0852, 34.7942</p>
+  </li>
+</ul>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <h2>Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    Generated automatically with AI + n8n.
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const attractions = [{"name":"Carmella Ba Nachala","shortDescription":"Carmella Ba Nachala is a popular restaurant in the heart of Tel Aviv, serving a wide range of delicious dishes made with fresh, locally-sourced ingredients. The restaurant's menu changes seasonally, but some popular items include their famous shakshuka, grilled meats, and fresh salads. With its cozy atmosphere and excellent service, Carmella Ba Nachala is a great place to enjoy a meal with friends or family. The restaurant is also known for its extensive wine list, featuring a variety of Israeli and international wines. Whether you're in the mood for a romantic dinner or a casual lunch, Carmella Ba Nachala is a great choice.","lat":32.0612,"lng":34.7742},{"name":"The Old Man","shortDescription":"The Old Man is a trendy restaurant and bar in the center of Tel Aviv, serving a unique blend of Asian-inspired dishes and craft cocktails. The restaurant's menu features a variety of small plates, including dumplings, noodles, and skewers, all made with fresh, high-quality ingredients. The Old Man is also known for its creative cocktails, made with house-made infusions and fresh juices. With its lively atmosphere and excellent service, The Old Man is a great place to grab a bite to eat or meet friends for drinks. The restaurant's decor is also worth noting, featuring a unique blend of vintage and modern elements.","lat":32.0653,"lng":34.7823},{"name":"Miznon","shortDescription":"Miznon is a popular restaurant in Tel Aviv, serving a wide range of delicious street food-style dishes. The restaurant's menu features a variety of pitas, salads, and grilled meats, all made with fresh, locally-sourced ingredients. Miznon is also known for its creative take on traditional Israeli dishes, such as shawarma and falafel. With its casual atmosphere and excellent service, Miznon is a great place to grab a quick bite to eat or meet friends for lunch. The restaurant is also very affordable, making it a great option for travelers on a budget.","lat":32.0632,"lng":34.7802},{"name":"HaBasta","shortDescription":"HaBasta is a popular restaurant in the heart of Tel Aviv, serving a wide range of delicious dishes made with fresh, locally-sourced ingredients. The restaurant's menu changes seasonally, but some popular items include their famous salads, grilled meats, and fresh seafood. With its cozy atmosphere and excellent service, HaBasta is a great place to enjoy a romantic dinner or a night out with friends. The restaurant is also known for its extensive wine list, featuring a variety of Israeli and international wines. HaBasta's decor is also worth noting, featuring a unique blend of modern and rustic elements.","lat":32.0602,"lng":34.7752},{"name":"Abraxas North","shortDescription":"Abraxas North is a popular restaurant in the north of Tel Aviv, serving a wide range of delicious dishes made with fresh, locally-sourced ingredients. The restaurant's menu features a variety of small plates, including salads, grilled meats, and seafood, all made with high-quality ingredients. Abraxas North is also known for its creative cocktails, made with house-made infusions and fresh juices. With its lively atmosphere and excellent service, Abraxas North is a great place to grab a bite to eat or meet friends for drinks. The restaurant's decor is also worth noting, featuring a unique blend of modern and industrial elements.","lat":32.0852,"lng":34.7942}];
+
+    const map = L.map('map').setView([32.0612, 34.7742], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    attractions.forEach(a => {
+      if (typeof a.lat === "number" && typeof a.lng === "number") {
+        L.marker([a.lat, a.lng]).addTo(map)
+          .bindPopup('<b>' + a.name + '</b><br/>' + a.shortDescription);
+      }
+    });
+  </script>
+</body>
+</html>
