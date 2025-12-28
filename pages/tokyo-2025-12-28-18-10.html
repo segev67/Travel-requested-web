@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Visit Tokyo</title>
+
+  <!-- Leaflet CSS (map library) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    :root { --bg:#0b1220; --card:#121b2f; --text:#e8edf7; --muted:#a8b3cf; --accent:#7c5cff; }
+    body{
+      margin:0;
+      font-family:system-ui, Arial;
+      background:linear-gradient(180deg,#0b1220,#0a0f1c);
+      color:var(--text);
+    }
+    header{ padding:28px 20px; max-width:1100px; margin:0 auto; }
+    .title{ font-size:34px; margin:0 0 8px; }
+    .subtitle{ color:var(--muted); margin:0; line-height:1.5; }
+
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 28px;
+      display:grid;
+      gap:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    h2{ margin:0 0 10px; font-size:20px; }
+    ul{ list-style:none; padding:0; margin:0; display:grid; gap:16px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card-head{ display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+    .badge{
+      background:rgba(124,92,255,0.2);
+      border:1px solid rgba(124,92,255,0.35);
+      color:#dcd6ff;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .card-image{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-bottom:8px;
+    }
+    .coords{ color:var(--muted); font-size:12px; margin:10px 0 0; }
+
+    #map{ height:420px; border-radius:16px; overflow:hidden; }
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 30px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Visit Tokyo</h1>
+    <p class="subtitle">Tokyo, the vibrant capital of Japan, is a city that seamlessly blends traditional and modern culture. From ancient temples and shrines to cutting-edge technology and innovative cuisine, Tokyo has something to offer for every interest and preference. With its unique blend of history, entertainment, and natural beauty, Tokyo is a must-visit destination for travelers from around the world.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Attractions list with images -->
+    <div class="section">
+      <h2>Top attractions</h2>
+      <ul>
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#1</span>
+      <h3>Shibuya Crossing</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Shibuya%20Crossing%20Tokyo" alt="Shibuya Crossing in Tokyo">
+    <p>Shibuya Crossing is one of the most iconic and busiest intersections in the world, surrounded by giant video screens, trendy shops, and restaurants. This famous crossing is a must-visit spot for people-watching and taking in the energetic atmosphere of Tokyo. Visitors can take a walk around the popular Shibuya area, which offers a wide range of shopping and dining options, from high-end fashion boutiques to small, independent cafes. The area is also home to the famous Shibuya 109 department store, a hub for Tokyo's fashion and music trends. At night, the crossing is illuminated by a kaleidoscope of neon lights, making it a truly unforgettable experience.</p>
+    <p class="coords">📍 35.6594, 139.7014</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#2</span>
+      <h3>Meiji Shrine</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Meiji%20Shrine%20Tokyo" alt="Meiji Shrine in Tokyo">
+    <p>The Meiji Shrine is a serene Shinto shrine located in a tranquil forested area, dedicated to the deified spirits of Emperor Meiji and his wife, Empress Shoken. The shrine is a beautiful example of traditional Japanese architecture, with its torii gate, treasure museum, and peaceful gardens. Visitors can take a stroll through the peaceful forest, which is especially beautiful during the cherry blossom season. The shrine is also a popular spot for traditional Japanese weddings and festivals, offering a glimpse into the country's rich cultural heritage. With its serene atmosphere and historic significance, the Meiji Shrine is a must-visit destination for anyone interested in Japanese culture and history.</p>
+    <p class="coords">📍 35.6762, 139.6992</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#3</span>
+      <h3>Tsukiji Outer Market</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Tsukiji%20Outer%20Market%20Tokyo" alt="Tsukiji Outer Market in Tokyo">
+    <p>The Tsukiji Outer Market is a bustling marketplace that offers a wide range of fresh seafood, sushi, and other local delicacies. While the inner market has moved to a new location, the outer market still retains its vibrant atmosphere and offers a fascinating glimpse into Tokyo's seafood culture. Visitors can try some of the freshest sushi they will ever have, sample local street food, and browse the various stalls selling everything from kitchenware to clothing. The market is also a great place to learn about the art of sushi-making and the importance of seafood in Japanese cuisine. With its lively atmosphere and incredible food options, the Tsukiji Outer Market is a must-visit destination for foodies and anyone looking for a unique Tokyo experience.</p>
+    <p class="coords">📍 35.6653, 139.7693</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#4</span>
+      <h3>Asakusa Kannon Temple</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Asakusa%20Kannon%20Temple%20Tokyo" alt="Asakusa Kannon Temple in Tokyo">
+    <p>The Asakusa Kannon Temple, also known as Senso-ji, is one of the oldest and most famous temples in Japan, dedicated to the goddess of mercy, Kannon. The temple is famous for its giant lantern and Nakamise shopping street, which is filled with traditional snacks and souvenirs. Visitors can explore the temple grounds, which include a five-story pagoda, a beautiful garden, and a shrine dedicated to the god of thunder. The temple is also a great place to learn about Japanese Buddhism and the history of the Asakusa area, which has been an important center of commerce and culture for centuries. With its rich history and cultural significance, the Asakusa Kannon Temple is a must-visit destination for anyone interested in Japanese history and culture.</p>
+    <p class="coords">📍 35.7104, 139.7967</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#5</span>
+      <h3>Imperial Palace</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Imperial%20Palace%20Tokyo" alt="Imperial Palace in Tokyo">
+    <p>The Imperial Palace is the main residence of the Emperor of Japan, located in the heart of Tokyo. The palace is a beautiful example of traditional Japanese architecture, with its moats, walls, and gardens. Visitors can take a stroll through the East Garden, which is a peaceful oasis in the midst of the bustling city. The palace is also a great place to learn about the history of the Japanese monarchy and the role of the Emperor in modern Japan. The surrounding area is also home to several important landmarks, including the Tokyo Station and the Marunouchi district, which offers a wide range of shopping and dining options. With its historic significance and beautiful gardens, the Imperial Palace is a must-visit destination for anyone interested in Japanese history and culture.</p>
+    <p class="coords">📍 35.6853, 139.7597</p>
+  </li>
+</ul>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <h2>Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    Generated automatically with AI + n8n.
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const attractions = [{"name":"Shibuya Crossing","shortDescription":"Shibuya Crossing is one of the most iconic and busiest intersections in the world, surrounded by giant video screens, trendy shops, and restaurants. This famous crossing is a must-visit spot for people-watching and taking in the energetic atmosphere of Tokyo. Visitors can take a walk around the popular Shibuya area, which offers a wide range of shopping and dining options, from high-end fashion boutiques to small, independent cafes. The area is also home to the famous Shibuya 109 department store, a hub for Tokyo's fashion and music trends. At night, the crossing is illuminated by a kaleidoscope of neon lights, making it a truly unforgettable experience.","lat":35.6594,"lng":139.7014},{"name":"Meiji Shrine","shortDescription":"The Meiji Shrine is a serene Shinto shrine located in a tranquil forested area, dedicated to the deified spirits of Emperor Meiji and his wife, Empress Shoken. The shrine is a beautiful example of traditional Japanese architecture, with its torii gate, treasure museum, and peaceful gardens. Visitors can take a stroll through the peaceful forest, which is especially beautiful during the cherry blossom season. The shrine is also a popular spot for traditional Japanese weddings and festivals, offering a glimpse into the country's rich cultural heritage. With its serene atmosphere and historic significance, the Meiji Shrine is a must-visit destination for anyone interested in Japanese culture and history.","lat":35.6762,"lng":139.6992},{"name":"Tsukiji Outer Market","shortDescription":"The Tsukiji Outer Market is a bustling marketplace that offers a wide range of fresh seafood, sushi, and other local delicacies. While the inner market has moved to a new location, the outer market still retains its vibrant atmosphere and offers a fascinating glimpse into Tokyo's seafood culture. Visitors can try some of the freshest sushi they will ever have, sample local street food, and browse the various stalls selling everything from kitchenware to clothing. The market is also a great place to learn about the art of sushi-making and the importance of seafood in Japanese cuisine. With its lively atmosphere and incredible food options, the Tsukiji Outer Market is a must-visit destination for foodies and anyone looking for a unique Tokyo experience.","lat":35.6653,"lng":139.7693},{"name":"Asakusa Kannon Temple","shortDescription":"The Asakusa Kannon Temple, also known as Senso-ji, is one of the oldest and most famous temples in Japan, dedicated to the goddess of mercy, Kannon. The temple is famous for its giant lantern and Nakamise shopping street, which is filled with traditional snacks and souvenirs. Visitors can explore the temple grounds, which include a five-story pagoda, a beautiful garden, and a shrine dedicated to the god of thunder. The temple is also a great place to learn about Japanese Buddhism and the history of the Asakusa area, which has been an important center of commerce and culture for centuries. With its rich history and cultural significance, the Asakusa Kannon Temple is a must-visit destination for anyone interested in Japanese history and culture.","lat":35.7104,"lng":139.7967},{"name":"Imperial Palace","shortDescription":"The Imperial Palace is the main residence of the Emperor of Japan, located in the heart of Tokyo. The palace is a beautiful example of traditional Japanese architecture, with its moats, walls, and gardens. Visitors can take a stroll through the East Garden, which is a peaceful oasis in the midst of the bustling city. The palace is also a great place to learn about the history of the Japanese monarchy and the role of the Emperor in modern Japan. The surrounding area is also home to several important landmarks, including the Tokyo Station and the Marunouchi district, which offers a wide range of shopping and dining options. With its historic significance and beautiful gardens, the Imperial Palace is a must-visit destination for anyone interested in Japanese history and culture.","lat":35.6853,"lng":139.7597}];
+
+    const map = L.map('map').setView([35.6594, 139.7014], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    attractions.forEach(a => {
+      if (typeof a.lat === "number" && typeof a.lng === "number") {
+        L.marker([a.lat, a.lng]).addTo(map)
+          .bindPopup('<b>' + a.name + '</b><br/>' + a.shortDescription);
+      }
+    });
+  </script>
+</body>
+</html>
