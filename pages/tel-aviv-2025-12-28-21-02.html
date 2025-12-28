@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Visit Tel Aviv</title>
+
+  <!-- Leaflet CSS (map library) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    :root { --bg:#0b1220; --card:#121b2f; --text:#e8edf7; --muted:#a8b3cf; --accent:#7c5cff; }
+    body{
+      margin:0;
+      font-family:system-ui, Arial;
+      background:linear-gradient(180deg,#0b1220,#0a0f1c);
+      color:var(--text);
+    }
+    header{ padding:28px 20px; max-width:1100px; margin:0 auto; }
+    .title{ font-size:34px; margin:0 0 8px; }
+    .subtitle{ color:var(--muted); margin:0; line-height:1.5; }
+
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 28px;
+      display:grid;
+      gap:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    h2{ margin:0 0 10px; font-size:20px; }
+    ul{ list-style:none; padding:0; margin:0; display:grid; gap:16px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card-head{ display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+    .badge{
+      background:rgba(124,92,255,0.2);
+      border:1px solid rgba(124,92,255,0.35);
+      color:#dcd6ff;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .card-image{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-bottom:8px;
+    }
+    .coords{ color:var(--muted); font-size:12px; margin:10px 0 0; }
+
+    #map{ height:420px; border-radius:16px; overflow:hidden; }
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 30px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Visit Tel Aviv</h1>
+    <p class="subtitle">Tel Aviv is a vibrant city that never sleeps, with a stunning coastline and a thriving nightlife scene. From beautiful beaches to lively bars and clubs, Tel Aviv has something for everyone. Whether you're looking to relax and soak up the sun or dance the night away, Tel Aviv is the perfect destination for you.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Attractions list with images -->
+    <div class="section">
+      <h2>Top attractions</h2>
+      <ul>
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#1</span>
+      <h3>Frishman Beach</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Frishman%20Beach%20Tel%20Aviv" alt="Frishman Beach in Tel Aviv">
+    <p>Frishman Beach is one of Tel Aviv's most popular beaches, known for its crystal-clear waters and powdery white sand. The beach is lined with restaurants, bars, and cafes, making it the perfect spot to relax and enjoy the sun, sea, and sand. Visitors can also take part in a variety of water sports, including surfing, kayaking, and paddleboarding. As the sun sets, the beach comes alive with music and dancing, making it a must-visit spot for anyone looking to experience Tel Aviv's vibrant nightlife. With its stunning views and lively atmosphere, Frishman Beach is a must-visit attraction for anyone traveling to Tel Aviv.</p>
+    <p class="coords">📍 32.073333, 34.768056</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#2</span>
+      <h3>Gordon Beach</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Gordon%20Beach%20Tel%20Aviv" alt="Gordon Beach in Tel Aviv">
+    <p>Gordon Beach is another of Tel Aviv's stunning beaches, known for its picturesque views and lively atmosphere. The beach is surrounded by restaurants, bars, and cafes, making it the perfect spot to relax and enjoy the sun, sea, and sand. Visitors can also take part in a variety of water sports, including surfing, kayaking, and paddleboarding. As the sun sets, the beach comes alive with music and dancing, making it a must-visit spot for anyone looking to experience Tel Aviv's vibrant nightlife. With its stunning views and lively atmosphere, Gordon Beach is a must-visit attraction for anyone traveling to Tel Aviv. The beach is also home to a number of events and festivals throughout the year, making it a great spot to experience the city's vibrant culture.</p>
+    <p class="coords">📍 32.083333, 34.766667</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#3</span>
+      <h3>Allenby Beach</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Allenby%20Beach%20Tel%20Aviv" alt="Allenby Beach in Tel Aviv">
+    <p>Allenby Beach is a popular spot for surfers and beachgoers alike, with its consistent waves and stunning views. The beach is surrounded by restaurants, bars, and cafes, making it the perfect spot to relax and enjoy the sun, sea, and sand. Visitors can also take part in a variety of water sports, including surfing, kayaking, and paddleboarding. As the sun sets, the beach comes alive with music and dancing, making it a must-visit spot for anyone looking to experience Tel Aviv's vibrant nightlife. With its stunning views and lively atmosphere, Allenby Beach is a must-visit attraction for anyone traveling to Tel Aviv. The beach is also home to a number of events and festivals throughout the year, making it a great spot to experience the city's vibrant culture. The beach is particularly popular with young travelers and locals, making it a great spot to meet new people and make friends.</p>
+    <p class="coords">📍 32.063333, 34.763056</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#4</span>
+      <h3>Hilton Beach</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Hilton%20Beach%20Tel%20Aviv" alt="Hilton Beach in Tel Aviv">
+    <p>Hilton Beach is a popular spot for beachgoers and water sports enthusiasts, with its stunning views and lively atmosphere. The beach is surrounded by restaurants, bars, and cafes, making it the perfect spot to relax and enjoy the sun, sea, and sand. Visitors can also take part in a variety of water sports, including surfing, kayaking, and paddleboarding. As the sun sets, the beach comes alive with music and dancing, making it a must-visit spot for anyone looking to experience Tel Aviv's vibrant nightlife. With its stunning views and lively atmosphere, Hilton Beach is a must-visit attraction for anyone traveling to Tel Aviv. The beach is also home to a number of events and festivals throughout the year, making it a great spot to experience the city's vibrant culture. The beach is particularly popular with families and couples, making it a great spot to relax and enjoy quality time with loved ones.</p>
+    <p class="coords">📍 32.093333, 34.769444</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#5</span>
+      <h3>Jerusalem Beach</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Jerusalem%20Beach%20Tel%20Aviv" alt="Jerusalem Beach in Tel Aviv">
+    <p>Jerusalem Beach is a quiet and secluded spot, perfect for those looking to escape the hustle and bustle of the city. The beach is surrounded by stunning views of the Mediterranean Sea and is home to a number of restaurants and cafes. Visitors can relax and enjoy the sun, sea, and sand, or take part in a variety of water sports, including surfing, kayaking, and paddleboarding. As the sun sets, the beach comes alive with music and dancing, making it a must-visit spot for anyone looking to experience Tel Aviv's vibrant nightlife. With its stunning views and lively atmosphere, Jerusalem Beach is a must-visit attraction for anyone traveling to Tel Aviv. The beach is also home to a number of events and festivals throughout the year, making it a great spot to experience the city's vibrant culture. The beach is particularly popular with locals, making it a great spot to experience the authentic side of Tel Aviv.</p>
+    <p class="coords">📍 32.053333, 34.758056</p>
+  </li>
+</ul>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <h2>Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    Generated automatically with AI + n8n.
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const attractions = [{"name":"Frishman Beach","shortDescription":"Frishman Beach is one of Tel Aviv's most popular beaches, known for its crystal-clear waters and powdery white sand. The beach is lined with restaurants, bars, and cafes, making it the perfect spot to relax and enjoy the sun, sea, and sand. Visitors can also take part in a variety of water sports, including surfing, kayaking, and paddleboarding. As the sun sets, the beach comes alive with music and dancing, making it a must-visit spot for anyone looking to experience Tel Aviv's vibrant nightlife. With its stunning views and lively atmosphere, Frishman Beach is a must-visit attraction for anyone traveling to Tel Aviv.","lat":32.073333,"lng":34.768056},{"name":"Gordon Beach","shortDescription":"Gordon Beach is another of Tel Aviv's stunning beaches, known for its picturesque views and lively atmosphere. The beach is surrounded by restaurants, bars, and cafes, making it the perfect spot to relax and enjoy the sun, sea, and sand. Visitors can also take part in a variety of water sports, including surfing, kayaking, and paddleboarding. As the sun sets, the beach comes alive with music and dancing, making it a must-visit spot for anyone looking to experience Tel Aviv's vibrant nightlife. With its stunning views and lively atmosphere, Gordon Beach is a must-visit attraction for anyone traveling to Tel Aviv. The beach is also home to a number of events and festivals throughout the year, making it a great spot to experience the city's vibrant culture.","lat":32.083333,"lng":34.766667},{"name":"Allenby Beach","shortDescription":"Allenby Beach is a popular spot for surfers and beachgoers alike, with its consistent waves and stunning views. The beach is surrounded by restaurants, bars, and cafes, making it the perfect spot to relax and enjoy the sun, sea, and sand. Visitors can also take part in a variety of water sports, including surfing, kayaking, and paddleboarding. As the sun sets, the beach comes alive with music and dancing, making it a must-visit spot for anyone looking to experience Tel Aviv's vibrant nightlife. With its stunning views and lively atmosphere, Allenby Beach is a must-visit attraction for anyone traveling to Tel Aviv. The beach is also home to a number of events and festivals throughout the year, making it a great spot to experience the city's vibrant culture. The beach is particularly popular with young travelers and locals, making it a great spot to meet new people and make friends.","lat":32.063333,"lng":34.763056},{"name":"Hilton Beach","shortDescription":"Hilton Beach is a popular spot for beachgoers and water sports enthusiasts, with its stunning views and lively atmosphere. The beach is surrounded by restaurants, bars, and cafes, making it the perfect spot to relax and enjoy the sun, sea, and sand. Visitors can also take part in a variety of water sports, including surfing, kayaking, and paddleboarding. As the sun sets, the beach comes alive with music and dancing, making it a must-visit spot for anyone looking to experience Tel Aviv's vibrant nightlife. With its stunning views and lively atmosphere, Hilton Beach is a must-visit attraction for anyone traveling to Tel Aviv. The beach is also home to a number of events and festivals throughout the year, making it a great spot to experience the city's vibrant culture. The beach is particularly popular with families and couples, making it a great spot to relax and enjoy quality time with loved ones.","lat":32.093333,"lng":34.769444},{"name":"Jerusalem Beach","shortDescription":"Jerusalem Beach is a quiet and secluded spot, perfect for those looking to escape the hustle and bustle of the city. The beach is surrounded by stunning views of the Mediterranean Sea and is home to a number of restaurants and cafes. Visitors can relax and enjoy the sun, sea, and sand, or take part in a variety of water sports, including surfing, kayaking, and paddleboarding. As the sun sets, the beach comes alive with music and dancing, making it a must-visit spot for anyone looking to experience Tel Aviv's vibrant nightlife. With its stunning views and lively atmosphere, Jerusalem Beach is a must-visit attraction for anyone traveling to Tel Aviv. The beach is also home to a number of events and festivals throughout the year, making it a great spot to experience the city's vibrant culture. The beach is particularly popular with locals, making it a great spot to experience the authentic side of Tel Aviv.","lat":32.053333,"lng":34.758056}];
+
+    const map = L.map('map').setView([32.073333, 34.768056], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    attractions.forEach(a => {
+      if (typeof a.lat === "number" && typeof a.lng === "number") {
+        L.marker([a.lat, a.lng]).addTo(map)
+          .bindPopup('<b>' + a.name + '</b><br/>' + a.shortDescription);
+      }
+    });
+  </script>
+</body>
+</html>
