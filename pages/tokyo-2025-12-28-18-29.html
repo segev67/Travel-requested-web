@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Visit Tokyo</title>
+
+  <!-- Leaflet CSS (map library) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    :root { --bg:#0b1220; --card:#121b2f; --text:#e8edf7; --muted:#a8b3cf; --accent:#7c5cff; }
+    body{
+      margin:0;
+      font-family:system-ui, Arial;
+      background:linear-gradient(180deg,#0b1220,#0a0f1c);
+      color:var(--text);
+    }
+    header{ padding:28px 20px; max-width:1100px; margin:0 auto; }
+    .title{ font-size:34px; margin:0 0 8px; }
+    .subtitle{ color:var(--muted); margin:0; line-height:1.5; }
+
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 28px;
+      display:grid;
+      gap:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    h2{ margin:0 0 10px; font-size:20px; }
+    ul{ list-style:none; padding:0; margin:0; display:grid; gap:16px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card-head{ display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+    .badge{
+      background:rgba(124,92,255,0.2);
+      border:1px solid rgba(124,92,255,0.35);
+      color:#dcd6ff;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .card-image{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-bottom:8px;
+    }
+    .coords{ color:var(--muted); font-size:12px; margin:10px 0 0; }
+
+    #map{ height:420px; border-radius:16px; overflow:hidden; }
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 30px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Visit Tokyo</h1>
+    <p class="subtitle">Since the location is not specified and no previous version or user feedback is provided, I will create a general template that can be used once the location and feedback are given. Please provide the necessary details to create a tailored travel guide.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Attractions list with images -->
+    <div class="section">
+      <h2>Top attractions</h2>
+      <ul>
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#1</span>
+      <h3>Example Attraction 1</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Example%20Attraction%20City" alt="Example Attraction 1 in Tokyo">
+    <p>This is a placeholder attraction. Once the location is specified, this will be replaced with a real attraction. The description will be detailed and engaging, explaining why this attraction is a must-visit. It will include specific details about the attraction, its history, and what makes it unique. Visitors will find this attraction fascinating due to its rich history and cultural significance. The attraction offers a glimpse into the local way of life, showcasing traditional practices and customs. By visiting this attraction, travelers can gain a deeper understanding of the location's heritage and its people.</p>
+    <p class="coords">📍 0, 0</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#2</span>
+      <h3>Example Attraction 2</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Example%20Attraction%20City" alt="Example Attraction 2 in Tokyo">
+    <p>Similar to the first attraction, this is a placeholder. It will be replaced with a real attraction that fits the specified location. The description will highlight the attraction's unique features, its contribution to the local culture, and why it is a popular destination among tourists. This attraction offers stunning views, making it a perfect spot for photography enthusiasts. The surrounding area is also worth exploring, with its charming streets and local eateries. Visitors can enjoy a variety of activities here, from guided tours to interactive exhibits. The attraction's significance extends beyond its aesthetic appeal, as it also serves as an educational hub.</p>
+    <p class="coords">📍 0, 0</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#3</span>
+      <h3>Example Attraction 3</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Example%20Attraction%20City" alt="Example Attraction 3 in Tokyo">
+    <p>This placeholder will be replaced with an actual attraction once the location is provided. The description will delve into the attraction's historical background, its architectural style, and the events it hosts. The attraction is not only a testament to the location's architectural prowess but also a vibrant venue for cultural events. Visitors can attend concerts, festivals, or workshops, depending on the time of their visit. The attraction's design is a blend of traditional and modern elements, reflecting the location's evolution over time. It is a place where the past meets the present, offering a unique experience for all who visit.</p>
+    <p class="coords">📍 0, 0</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#4</span>
+      <h3>Example Attraction 4</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Example%20Attraction%20City" alt="Example Attraction 4 in Tokyo">
+    <p>Upon receiving the location and feedback, this placeholder attraction will be replaced. The description will focus on the attraction's natural beauty, its flora and fauna, and the recreational activities it offers. This attraction is a nature lover's paradise, with its lush greenery and diverse wildlife. Visitors can engage in hiking, birdwatching, or simply enjoy a picnic amidst nature. The attraction is also home to several rare species, making it a significant site for conservation efforts. The serene environment and the opportunity to connect with nature make this attraction a must-visit for those seeking tranquility and adventure.</p>
+    <p class="coords">📍 0, 0</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#5</span>
+      <h3>Example Attraction 5</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Example%20Attraction%20City" alt="Example Attraction 5 in Tokyo">
+    <p>This final placeholder will be replaced with a detailed description of a real attraction in the specified location. The description will cover the attraction's entertainment options, dining experiences, and shopping opportunities. This attraction is a one-stop destination for entertainment, offering a range of activities for all ages. From thrilling rides to spectacular shows, visitors can enjoy a day filled with excitement and fun. The attraction also features a variety of restaurants and cafes, serving local and international cuisine. For those who love to shop, there are numerous stores and boutiques to explore, making this attraction a complete package for a fun-filled day out.</p>
+    <p class="coords">📍 0, 0</p>
+  </li>
+</ul>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <h2>Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    Generated automatically with AI + n8n.
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const attractions = [{"name":"Example Attraction 1","shortDescription":"This is a placeholder attraction. Once the location is specified, this will be replaced with a real attraction. The description will be detailed and engaging, explaining why this attraction is a must-visit. It will include specific details about the attraction, its history, and what makes it unique. Visitors will find this attraction fascinating due to its rich history and cultural significance. The attraction offers a glimpse into the local way of life, showcasing traditional practices and customs. By visiting this attraction, travelers can gain a deeper understanding of the location's heritage and its people.","lat":0,"lng":0},{"name":"Example Attraction 2","shortDescription":"Similar to the first attraction, this is a placeholder. It will be replaced with a real attraction that fits the specified location. The description will highlight the attraction's unique features, its contribution to the local culture, and why it is a popular destination among tourists. This attraction offers stunning views, making it a perfect spot for photography enthusiasts. The surrounding area is also worth exploring, with its charming streets and local eateries. Visitors can enjoy a variety of activities here, from guided tours to interactive exhibits. The attraction's significance extends beyond its aesthetic appeal, as it also serves as an educational hub.","lat":0,"lng":0},{"name":"Example Attraction 3","shortDescription":"This placeholder will be replaced with an actual attraction once the location is provided. The description will delve into the attraction's historical background, its architectural style, and the events it hosts. The attraction is not only a testament to the location's architectural prowess but also a vibrant venue for cultural events. Visitors can attend concerts, festivals, or workshops, depending on the time of their visit. The attraction's design is a blend of traditional and modern elements, reflecting the location's evolution over time. It is a place where the past meets the present, offering a unique experience for all who visit.","lat":0,"lng":0},{"name":"Example Attraction 4","shortDescription":"Upon receiving the location and feedback, this placeholder attraction will be replaced. The description will focus on the attraction's natural beauty, its flora and fauna, and the recreational activities it offers. This attraction is a nature lover's paradise, with its lush greenery and diverse wildlife. Visitors can engage in hiking, birdwatching, or simply enjoy a picnic amidst nature. The attraction is also home to several rare species, making it a significant site for conservation efforts. The serene environment and the opportunity to connect with nature make this attraction a must-visit for those seeking tranquility and adventure.","lat":0,"lng":0},{"name":"Example Attraction 5","shortDescription":"This final placeholder will be replaced with a detailed description of a real attraction in the specified location. The description will cover the attraction's entertainment options, dining experiences, and shopping opportunities. This attraction is a one-stop destination for entertainment, offering a range of activities for all ages. From thrilling rides to spectacular shows, visitors can enjoy a day filled with excitement and fun. The attraction also features a variety of restaurants and cafes, serving local and international cuisine. For those who love to shop, there are numerous stores and boutiques to explore, making this attraction a complete package for a fun-filled day out.","lat":0,"lng":0}];
+
+    const map = L.map('map').setView([0, 0], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    attractions.forEach(a => {
+      if (typeof a.lat === "number" && typeof a.lng === "number") {
+        L.marker([a.lat, a.lng]).addTo(map)
+          .bindPopup('<b>' + a.name + '</b><br/>' + a.shortDescription);
+      }
+    });
+  </script>
+</body>
+</html>
