@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Visit Tokyo</title>
+
+  <!-- Leaflet CSS (map library) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    :root { --bg:#0b1220; --card:#121b2f; --text:#e8edf7; --muted:#a8b3cf; --accent:#7c5cff; }
+    body{
+      margin:0;
+      font-family:system-ui, Arial;
+      background:linear-gradient(180deg,#0b1220,#0a0f1c);
+      color:var(--text);
+    }
+    header{ padding:28px 20px; max-width:1100px; margin:0 auto; }
+    .title{ font-size:34px; margin:0 0 8px; }
+    .subtitle{ color:var(--muted); margin:0; line-height:1.5; }
+
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 28px;
+      display:grid;
+      gap:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    h2{ margin:0 0 10px; font-size:20px; }
+    ul{ list-style:none; padding:0; margin:0; display:grid; gap:16px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card-head{ display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+    .badge{
+      background:rgba(124,92,255,0.2);
+      border:1px solid rgba(124,92,255,0.35);
+      color:#dcd6ff;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .card-image{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-bottom:8px;
+    }
+    .coords{ color:var(--muted); font-size:12px; margin:10px 0 0; }
+
+    #map{ height:420px; border-radius:16px; overflow:hidden; }
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 30px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Visit Tokyo</h1>
+    <p class="subtitle">Tokyo is a fascinating city that blends traditional and modern culture, offering a unique experience for visitors. From ancient temples to cutting-edge technology, Tokyo has something for everyone. The city's vibrant atmosphere, delicious food, and rich history make it a must-visit destination.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Attractions list with images -->
+    <div class="section">
+      <h2>Top attractions</h2>
+      <ul>
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#1</span>
+      <h3>Shibuya Crossing</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Shibuya%20Crossing%20Tokyo" alt="Shibuya Crossing in Tokyo">
+    <p>Shibuya Crossing is one of the most iconic landmarks in Tokyo, known for its busiest and most colorful street crossing in the world. The area is surrounded by shopping and entertainment districts, making it a hub for young people and tourists alike. Visitors can take a walk around the popular Shibuya area, grab a coffee at one of the trendy cafes, or shop at the local boutiques. The crossing is especially famous for its unique scramble crossing system, where pedestrians can cross the street from any direction. At night, the area is illuminated with neon lights, making it a great spot for photography.</p>
+    <p class="coords">📍 35.6593, 139.7014</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#2</span>
+      <h3>Tokyo Tower</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Tokyo%20Tower%20Tokyo" alt="Tokyo Tower in Tokyo">
+    <p>Tokyo Tower is a communications tower that offers breathtaking views of the city from its observation decks. The tower stands at 332.9 meters tall and is a prominent landmark in Tokyo's skyline. Visitors can enjoy the stunning views of the city, especially during sunset or at night when the tower is illuminated. The tower also has a variety of restaurants and shops, making it a great spot to spend an evening. In addition to its functional purpose, Tokyo Tower has become a cultural icon of the city, symbolizing Tokyo's growth and development.</p>
+    <p class="coords">📍 35.6586, 139.7654</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#3</span>
+      <h3>Meiji Shrine</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Meiji%20Shrine%20Tokyo" alt="Meiji Shrine in Tokyo">
+    <p>Meiji Shrine is a serene Shinto shrine located in a tranquil forested area, offering a peaceful escape from the hustle and bustle of the city. The shrine is dedicated to the deified spirits of Emperor Meiji and his wife, Empress Shoken, and is a significant cultural and historical landmark in Japan. Visitors can explore the shrine's grounds, which include beautiful gardens, walking trails, and traditional Japanese architecture. The shrine is especially famous for its torii gate, which is one of the largest in Japan. The surrounding forest is also home to a variety of wildlife, including birds, squirrels, and deer.</p>
+    <p class="coords">📍 35.6763, 139.6994</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#4</span>
+      <h3>Tsukiji Outer Market</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Tsukiji%20Outer%20Market%20Tokyo" alt="Tsukiji Outer Market in Tokyo">
+    <p>Tsukiji Outer Market is a bustling marketplace that offers a wide variety of fresh seafood, sushi, and other local delicacies. The market is known for its lively atmosphere, with vendors selling everything from fresh tuna to octopus and other seafood. Visitors can sample some of the freshest sushi they'll ever have, or try some of the local street food, such as grilled scallops or seafood skewers. The market is also a great place to buy souvenirs, such as kitchenware, tea, or other Japanese goods. While the inner market has moved to a new location, the outer market still retains its charm and is a must-visit destination for foodies.</p>
+    <p class="coords">📍 35.6653, 139.7694</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#5</span>
+      <h3>Asakusa Kannon Temple</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Asakusa%20Kannon%20Temple%20Tokyo" alt="Asakusa Kannon Temple in Tokyo">
+    <p>Asakusa Kannon Temple, also known as Senso-ji, is one of the oldest and most famous temples in Japan, dedicated to the Buddhist goddess of mercy, Kannon. The temple is famous for its giant lantern, which hangs from the entrance gate, and its Nakamise shopping street, which is filled with traditional snacks and souvenirs. Visitors can explore the temple's grounds, which include a five-story pagoda, a main hall, and a variety of shrines and statues. The temple is also known for its traditional festivals and events, such as the Sanja Matsuri, which takes place in May. The surrounding Asakusa district is also a great place to experience traditional Japanese culture, with its narrow streets, old shops, and traditional restaurants.</p>
+    <p class="coords">📍 35.7104, 139.7967</p>
+  </li>
+</ul>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <h2>Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    Generated automatically with AI + n8n.
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const attractions = [{"name":"Shibuya Crossing","shortDescription":"Shibuya Crossing is one of the most iconic landmarks in Tokyo, known for its busiest and most colorful street crossing in the world. The area is surrounded by shopping and entertainment districts, making it a hub for young people and tourists alike. Visitors can take a walk around the popular Shibuya area, grab a coffee at one of the trendy cafes, or shop at the local boutiques. The crossing is especially famous for its unique scramble crossing system, where pedestrians can cross the street from any direction. At night, the area is illuminated with neon lights, making it a great spot for photography.","lat":35.6593,"lng":139.7014},{"name":"Tokyo Tower","shortDescription":"Tokyo Tower is a communications tower that offers breathtaking views of the city from its observation decks. The tower stands at 332.9 meters tall and is a prominent landmark in Tokyo's skyline. Visitors can enjoy the stunning views of the city, especially during sunset or at night when the tower is illuminated. The tower also has a variety of restaurants and shops, making it a great spot to spend an evening. In addition to its functional purpose, Tokyo Tower has become a cultural icon of the city, symbolizing Tokyo's growth and development.","lat":35.6586,"lng":139.7654},{"name":"Meiji Shrine","shortDescription":"Meiji Shrine is a serene Shinto shrine located in a tranquil forested area, offering a peaceful escape from the hustle and bustle of the city. The shrine is dedicated to the deified spirits of Emperor Meiji and his wife, Empress Shoken, and is a significant cultural and historical landmark in Japan. Visitors can explore the shrine's grounds, which include beautiful gardens, walking trails, and traditional Japanese architecture. The shrine is especially famous for its torii gate, which is one of the largest in Japan. The surrounding forest is also home to a variety of wildlife, including birds, squirrels, and deer.","lat":35.6763,"lng":139.6994},{"name":"Tsukiji Outer Market","shortDescription":"Tsukiji Outer Market is a bustling marketplace that offers a wide variety of fresh seafood, sushi, and other local delicacies. The market is known for its lively atmosphere, with vendors selling everything from fresh tuna to octopus and other seafood. Visitors can sample some of the freshest sushi they'll ever have, or try some of the local street food, such as grilled scallops or seafood skewers. The market is also a great place to buy souvenirs, such as kitchenware, tea, or other Japanese goods. While the inner market has moved to a new location, the outer market still retains its charm and is a must-visit destination for foodies.","lat":35.6653,"lng":139.7694},{"name":"Asakusa Kannon Temple","shortDescription":"Asakusa Kannon Temple, also known as Senso-ji, is one of the oldest and most famous temples in Japan, dedicated to the Buddhist goddess of mercy, Kannon. The temple is famous for its giant lantern, which hangs from the entrance gate, and its Nakamise shopping street, which is filled with traditional snacks and souvenirs. Visitors can explore the temple's grounds, which include a five-story pagoda, a main hall, and a variety of shrines and statues. The temple is also known for its traditional festivals and events, such as the Sanja Matsuri, which takes place in May. The surrounding Asakusa district is also a great place to experience traditional Japanese culture, with its narrow streets, old shops, and traditional restaurants.","lat":35.7104,"lng":139.7967}];
+
+    const map = L.map('map').setView([35.6593, 139.7014], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    attractions.forEach(a => {
+      if (typeof a.lat === "number" && typeof a.lng === "number") {
+        L.marker([a.lat, a.lng]).addTo(map)
+          .bindPopup('<b>' + a.name + '</b><br/>' + a.shortDescription);
+      }
+    });
+  </script>
+</body>
+</html>
