@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Visit Tel Aviv</title>
+
+  <!-- Leaflet CSS (map library) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    :root { --bg:#0b1220; --card:#121b2f; --text:#e8edf7; --muted:#a8b3cf; --accent:#7c5cff; }
+    body{
+      margin:0;
+      font-family:system-ui, Arial;
+      background:linear-gradient(180deg,#0b1220,#0a0f1c);
+      color:var(--text);
+    }
+    header{ padding:28px 20px; max-width:1100px; margin:0 auto; }
+    .title{ font-size:34px; margin:0 0 8px; }
+    .subtitle{ color:var(--muted); margin:0; line-height:1.5; }
+
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 28px;
+      display:grid;
+      gap:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    h2{ margin:0 0 10px; font-size:20px; }
+    ul{ list-style:none; padding:0; margin:0; display:grid; gap:16px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card-head{ display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+    .badge{
+      background:rgba(124,92,255,0.2);
+      border:1px solid rgba(124,92,255,0.35);
+      color:#dcd6ff;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .card-image{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-bottom:8px;
+    }
+    .coords{ color:var(--muted); font-size:12px; margin:10px 0 0; }
+
+    #map{ height:420px; border-radius:16px; overflow:hidden; }
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 30px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Visit Tel Aviv</h1>
+    <p class="subtitle">Tel Aviv is a vibrant and modern city located on the Mediterranean coast of Israel. It is known for its beautiful beaches, rich cultural scene, and historic landmarks. Visitors to Tel Aviv can enjoy a wide range of activities, from relaxing on the beach to exploring the city's many museums and historical sites.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Attractions list with images -->
+    <div class="section">
+      <h2>Top attractions</h2>
+      <ul>
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#1</span>
+      <h3>White City</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=White%20City%20Tel%20Aviv" alt="White City in Tel Aviv">
+    <p>The White City is a UNESCO World Heritage Site and a must-visit attraction in Tel Aviv. It is a collection of over 4,000 buildings built in the 1930s in the Bauhaus style, which was popular at the time. The buildings are characterized by their clean lines, minimal ornamentation, and functionality. Visitors can take a guided tour of the White City to learn more about its history and architecture. The area is also home to many cafes, restaurants, and shops, making it a great place to spend an afternoon.</p>
+    <p class="coords">📍 32.0738, 34.7743</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#2</span>
+      <h3>Tel Aviv Beach</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Tel%20Aviv%20Beach" alt="Tel Aviv Beach in Tel Aviv">
+    <p>Tel Aviv Beach is a beautiful stretch of coastline that runs along the western edge of the city. The beach is popular with locals and tourists alike, and offers a wide range of activities, including swimming, sunbathing, and water sports. Visitors can also take a leisurely stroll along the beachfront promenade, which is lined with cafes, restaurants, and shops. The beach is also a great place to watch the sunset, with the Mediterranean Sea providing a stunning backdrop. In the summer months, the beach hosts a number of events and festivals, including concerts and fireworks displays.</p>
+    <p class="coords">📍 32.0833, 34.7667</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#3</span>
+      <h3>Carmel Market</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Carmel%20Market%20Tel%20Aviv" alt="Carmel Market in Tel Aviv">
+    <p>The Carmel Market, also known as the Shuk HaCarmel, is a bustling marketplace in the heart of Tel Aviv. The market has been in operation since the 1920s and offers a wide range of goods, including fresh produce, spices, and souvenirs. Visitors can sample local delicacies, such as falafel and shawarma, and browse the many stalls selling everything from clothing to jewelry. The market is also a great place to pick up some unique souvenirs, such as handmade crafts and local artwork. The atmosphere is lively and colorful, with vendors calling out to passersby and the smell of fresh food filling the air.</p>
+    <p class="coords">📍 32.0667, 34.7667</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#4</span>
+      <h3>Eretz Israel Museum</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Eretz%20Israel%20Museum%20Tel%20Aviv" alt="Eretz Israel Museum in Tel Aviv">
+    <p>The Eretz Israel Museum is a museum located in the Ramat Aviv neighborhood of Tel Aviv. The museum tells the story of the history and culture of the Land of Israel, from prehistoric times to the present day. The museum's collections include a wide range of artifacts, including archaeological finds, art, and ethnographic objects. Visitors can explore the museum's many exhibits, which include a collection of ancient coins, a display of Jewish art and artifacts, and a exhibit on the history of the Israeli army. The museum also offers a number of temporary exhibits and events, including lectures and workshops.</p>
+    <p class="coords">📍 32.1167, 34.7833</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#5</span>
+      <h3>Jaffa Old Town</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Jaffa%20Old%20Town%20Tel%20Aviv" alt="Jaffa Old Town in Tel Aviv">
+    <p>Jaffa Old Town is a historic neighborhood located in the southern part of Tel Aviv. The area is known for its narrow streets, picturesque alleys, and historic buildings, which date back to the Ottoman era. Visitors can explore the many shops, galleries, and restaurants that line the streets, and visit the famous Jaffa Clock Tower, which was built in the 19th century. The area is also home to a number of historic landmarks, including the Church of St. Peter and the Al-Bahr Mosque. In the evening, the area comes alive with music and dance performances, and visitors can enjoy a romantic dinner at one of the many restaurants in the area.</p>
+    <p class="coords">📍 32.05, 34.75</p>
+  </li>
+</ul>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <h2>Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    Generated automatically with AI + n8n.
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const attractions = [{"name":"White City","shortDescription":"The White City is a UNESCO World Heritage Site and a must-visit attraction in Tel Aviv. It is a collection of over 4,000 buildings built in the 1930s in the Bauhaus style, which was popular at the time. The buildings are characterized by their clean lines, minimal ornamentation, and functionality. Visitors can take a guided tour of the White City to learn more about its history and architecture. The area is also home to many cafes, restaurants, and shops, making it a great place to spend an afternoon.","lat":32.0738,"lng":34.7743},{"name":"Tel Aviv Beach","shortDescription":"Tel Aviv Beach is a beautiful stretch of coastline that runs along the western edge of the city. The beach is popular with locals and tourists alike, and offers a wide range of activities, including swimming, sunbathing, and water sports. Visitors can also take a leisurely stroll along the beachfront promenade, which is lined with cafes, restaurants, and shops. The beach is also a great place to watch the sunset, with the Mediterranean Sea providing a stunning backdrop. In the summer months, the beach hosts a number of events and festivals, including concerts and fireworks displays.","lat":32.0833,"lng":34.7667},{"name":"Carmel Market","shortDescription":"The Carmel Market, also known as the Shuk HaCarmel, is a bustling marketplace in the heart of Tel Aviv. The market has been in operation since the 1920s and offers a wide range of goods, including fresh produce, spices, and souvenirs. Visitors can sample local delicacies, such as falafel and shawarma, and browse the many stalls selling everything from clothing to jewelry. The market is also a great place to pick up some unique souvenirs, such as handmade crafts and local artwork. The atmosphere is lively and colorful, with vendors calling out to passersby and the smell of fresh food filling the air.","lat":32.0667,"lng":34.7667},{"name":"Eretz Israel Museum","shortDescription":"The Eretz Israel Museum is a museum located in the Ramat Aviv neighborhood of Tel Aviv. The museum tells the story of the history and culture of the Land of Israel, from prehistoric times to the present day. The museum's collections include a wide range of artifacts, including archaeological finds, art, and ethnographic objects. Visitors can explore the museum's many exhibits, which include a collection of ancient coins, a display of Jewish art and artifacts, and a exhibit on the history of the Israeli army. The museum also offers a number of temporary exhibits and events, including lectures and workshops.","lat":32.1167,"lng":34.7833},{"name":"Jaffa Old Town","shortDescription":"Jaffa Old Town is a historic neighborhood located in the southern part of Tel Aviv. The area is known for its narrow streets, picturesque alleys, and historic buildings, which date back to the Ottoman era. Visitors can explore the many shops, galleries, and restaurants that line the streets, and visit the famous Jaffa Clock Tower, which was built in the 19th century. The area is also home to a number of historic landmarks, including the Church of St. Peter and the Al-Bahr Mosque. In the evening, the area comes alive with music and dance performances, and visitors can enjoy a romantic dinner at one of the many restaurants in the area.","lat":32.05,"lng":34.75}];
+
+    const map = L.map('map').setView([32.0738, 34.7743], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    attractions.forEach(a => {
+      if (typeof a.lat === "number" && typeof a.lng === "number") {
+        L.marker([a.lat, a.lng]).addTo(map)
+          .bindPopup('<b>' + a.name + '</b><br/>' + a.shortDescription);
+      }
+    });
+  </script>
+</body>
+</html>
