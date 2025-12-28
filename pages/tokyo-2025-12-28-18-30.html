@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Visit Tokyo</title>
+
+  <!-- Leaflet CSS (map library) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    :root { --bg:#0b1220; --card:#121b2f; --text:#e8edf7; --muted:#a8b3cf; --accent:#7c5cff; }
+    body{
+      margin:0;
+      font-family:system-ui, Arial;
+      background:linear-gradient(180deg,#0b1220,#0a0f1c);
+      color:var(--text);
+    }
+    header{ padding:28px 20px; max-width:1100px; margin:0 auto; }
+    .title{ font-size:34px; margin:0 0 8px; }
+    .subtitle{ color:var(--muted); margin:0; line-height:1.5; }
+
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 28px;
+      display:grid;
+      gap:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    h2{ margin:0 0 10px; font-size:20px; }
+    ul{ list-style:none; padding:0; margin:0; display:grid; gap:16px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card-head{ display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+    .badge{
+      background:rgba(124,92,255,0.2);
+      border:1px solid rgba(124,92,255,0.35);
+      color:#dcd6ff;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .card-image{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-bottom:8px;
+    }
+    .coords{ color:var(--muted); font-size:12px; margin:10px 0 0; }
+
+    #map{ height:420px; border-radius:16px; overflow:hidden; }
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 30px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Visit Tokyo</h1>
+    <p class="subtitle">Since the location and user feedback are empty, I will provide a default response. Please provide the location and user feedback to get a personalized travel guide.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Attractions list with images -->
+    <div class="section">
+      <h2>Top attractions</h2>
+      <ul>
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#1</span>
+      <h3>Default Attraction 1</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Default%20Attraction%201%20City" alt="Default Attraction 1 in Tokyo">
+    <p>This attraction is a must-visit for anyone looking to explore the local culture. With its rich history and stunning architecture, it's a great place to learn about the city's past. The attraction is surrounded by beautiful gardens and offers a unique perspective on the city. Visitors can take a guided tour to learn more about the attraction's significance and history. The attraction is open daily from 9 am to 5 pm, and tickets can be purchased online or at the door.</p>
+    <p class="coords">📍 37.7749, -122.4194</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#2</span>
+      <h3>Default Attraction 2</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Default%20Attraction%202%20City" alt="Default Attraction 2 in Tokyo">
+    <p>This attraction is a popular spot for outdoor enthusiasts, offering a range of activities such as hiking, biking, and kayaking. The attraction is surrounded by beautiful scenery and provides a great opportunity to connect with nature. Visitors can take a leisurely walk around the attraction or participate in one of the many guided tours. The attraction is open daily from 8 am to 6 pm, and admission is free. Visitors can also rent equipment or take a lesson from one of the many instructors on site.</p>
+    <p class="coords">📍 38.8977, -77.0365</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#3</span>
+      <h3>Default Attraction 3</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Default%20Attraction%203%20City" alt="Default Attraction 3 in Tokyo">
+    <p>This attraction is a world-renowned museum that features a vast collection of art and artifacts from around the world. The museum is home to many famous works of art, including paintings, sculptures, and installations. Visitors can take a self-guided tour of the museum or participate in one of the many guided tours. The museum is open daily from 10 am to 5 pm, and tickets can be purchased online or at the door. The museum also offers a range of educational programs and events throughout the year.</p>
+    <p class="coords">📍 40.7128, -74.006</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#4</span>
+      <h3>Default Attraction 4</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Default%20Attraction%204%20City" alt="Default Attraction 4 in Tokyo">
+    <p>This attraction is a historic landmark that offers stunning views of the city. The attraction is a great spot for photography and provides a unique perspective on the city's skyline. Visitors can take a guided tour of the attraction or simply enjoy the views from the observation deck. The attraction is open daily from 9 am to 10 pm, and tickets can be purchased online or at the door. Visitors can also enjoy a meal or snack at one of the many restaurants and cafes on site.</p>
+    <p class="coords">📍 34.0522, -118.2437</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#5</span>
+      <h3>Default Attraction 5</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Default%20Attraction%205%20City" alt="Default Attraction 5 in Tokyo">
+    <p>This attraction is a popular spot for shopping and dining, offering a range of unique boutiques and restaurants. The attraction is a great place to find one-of-a-kind gifts or souvenirs, and visitors can enjoy a meal or snack at one of the many eateries on site. The attraction is open daily from 10 am to 9 pm, and admission is free. Visitors can also take a guided tour of the attraction or simply explore on their own.</p>
+    <p class="coords">📍 41.8781, -87.6298</p>
+  </li>
+</ul>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <h2>Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    Generated automatically with AI + n8n.
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const attractions = [{"name":"Default Attraction 1","shortDescription":"This attraction is a must-visit for anyone looking to explore the local culture. With its rich history and stunning architecture, it's a great place to learn about the city's past. The attraction is surrounded by beautiful gardens and offers a unique perspective on the city. Visitors can take a guided tour to learn more about the attraction's significance and history. The attraction is open daily from 9 am to 5 pm, and tickets can be purchased online or at the door.","lat":37.7749,"lng":-122.4194},{"name":"Default Attraction 2","shortDescription":"This attraction is a popular spot for outdoor enthusiasts, offering a range of activities such as hiking, biking, and kayaking. The attraction is surrounded by beautiful scenery and provides a great opportunity to connect with nature. Visitors can take a leisurely walk around the attraction or participate in one of the many guided tours. The attraction is open daily from 8 am to 6 pm, and admission is free. Visitors can also rent equipment or take a lesson from one of the many instructors on site.","lat":38.8977,"lng":-77.0365},{"name":"Default Attraction 3","shortDescription":"This attraction is a world-renowned museum that features a vast collection of art and artifacts from around the world. The museum is home to many famous works of art, including paintings, sculptures, and installations. Visitors can take a self-guided tour of the museum or participate in one of the many guided tours. The museum is open daily from 10 am to 5 pm, and tickets can be purchased online or at the door. The museum also offers a range of educational programs and events throughout the year.","lat":40.7128,"lng":-74.006},{"name":"Default Attraction 4","shortDescription":"This attraction is a historic landmark that offers stunning views of the city. The attraction is a great spot for photography and provides a unique perspective on the city's skyline. Visitors can take a guided tour of the attraction or simply enjoy the views from the observation deck. The attraction is open daily from 9 am to 10 pm, and tickets can be purchased online or at the door. Visitors can also enjoy a meal or snack at one of the many restaurants and cafes on site.","lat":34.0522,"lng":-118.2437},{"name":"Default Attraction 5","shortDescription":"This attraction is a popular spot for shopping and dining, offering a range of unique boutiques and restaurants. The attraction is a great place to find one-of-a-kind gifts or souvenirs, and visitors can enjoy a meal or snack at one of the many eateries on site. The attraction is open daily from 10 am to 9 pm, and admission is free. Visitors can also take a guided tour of the attraction or simply explore on their own.","lat":41.8781,"lng":-87.6298}];
+
+    const map = L.map('map').setView([37.7749, -122.4194], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    attractions.forEach(a => {
+      if (typeof a.lat === "number" && typeof a.lng === "number") {
+        L.marker([a.lat, a.lng]).addTo(map)
+          .bindPopup('<b>' + a.name + '</b><br/>' + a.shortDescription);
+      }
+    });
+  </script>
+</body>
+</html>
