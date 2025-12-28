@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Visit Prague</title>
+
+  <!-- Leaflet CSS (map library) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    :root { --bg:#0b1220; --card:#121b2f; --text:#e8edf7; --muted:#a8b3cf; --accent:#7c5cff; }
+    body{
+      margin:0;
+      font-family:system-ui, Arial;
+      background:linear-gradient(180deg,#0b1220,#0a0f1c);
+      color:var(--text);
+    }
+    header{ padding:28px 20px; max-width:1100px; margin:0 auto; }
+    .title{ font-size:34px; margin:0 0 8px; }
+    .subtitle{ color:var(--muted); margin:0; line-height:1.5; }
+
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 28px;
+      display:grid;
+      gap:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    h2{ margin:0 0 10px; font-size:20px; }
+    ul{ list-style:none; padding:0; margin:0; display:grid; gap:16px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card-head{ display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+    .badge{
+      background:rgba(124,92,255,0.2);
+      border:1px solid rgba(124,92,255,0.35);
+      color:#dcd6ff;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .card-image{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-bottom:8px;
+    }
+    .coords{ color:var(--muted); font-size:12px; margin:10px 0 0; }
+
+    #map{ height:420px; border-radius:16px; overflow:hidden; }
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 30px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Visit Prague</h1>
+    <p class="subtitle">Prague, the capital city of the Czech Republic, is a beautiful and historic destination known for its stunning architecture, rich culture, and vibrant atmosphere. The city is filled with stunning landmarks, including the famous Charles Bridge and St. Vitus Cathedral. Visitors can enjoy a variety of activities, from exploring the city's many museums and galleries to taking a stroll along the Vltava River.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Attractions list with images -->
+    <div class="section">
+      <h2>Top attractions</h2>
+      <ul>
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#1</span>
+      <h3>Charles Bridge</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Charles%20Bridge%20Prague" alt="Charles Bridge in Prague">
+    <p>The Charles Bridge is a iconic landmark in Prague, known for its stunning Gothic architecture and beautiful statues. The bridge is lined with 30 statues of saints and other notable figures, and offers breathtaking views of the Vltava River and the city. Visitors can walk across the bridge, taking in the sights and sounds of the city, and enjoy the street performers and vendors that line the bridge. The bridge is particularly beautiful at night, when it is illuminated by thousands of lights. The Charles Bridge is a must-see attraction for anyone visiting Prague, and is a great place to start a tour of the city.</p>
+    <p class="coords">📍 50.0865, 14.4123</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#2</span>
+      <h3>St. Vitus Cathedral</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=St.%20Vitus%20Cathedral%20Prague" alt="St. Vitus Cathedral in Prague">
+    <p>The St. Vitus Cathedral is a stunning example of Gothic architecture, and is one of the most beautiful and historic landmarks in Prague. The cathedral is located within the Prague Castle complex, and features intricate stone carvings, stunning stained glass windows, and a beautiful interior. Visitors can take a guided tour of the cathedral, and climb to the top of the tower for breathtaking views of the city. The cathedral is a significant cultural and historical landmark, and is a must-see attraction for anyone visiting Prague. The cathedral is also a great place to learn about the history and culture of the city, and to see some of the beautiful artwork and architecture that Prague is known for.</p>
+    <p class="coords">📍 50.0909, 14.4014</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#3</span>
+      <h3>Old Town Square</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Old%20Town%20Square%20Prague" alt="Old Town Square in Prague">
+    <p>The Old Town Square is the heart of Prague's historic district, and is a bustling hub of activity and entertainment. The square is home to many of the city's most famous landmarks, including the Astronomical Clock and the Church of Our Lady Before Týn. Visitors can walk through the square, taking in the sights and sounds of the city, and enjoy the street performers, vendors, and cafes that line the square. The square is also a great place to try some of the local cuisine, and to shop for souvenirs and other items. The Old Town Square is a must-see attraction for anyone visiting Prague, and is a great place to experience the city's vibrant atmosphere and culture.</p>
+    <p class="coords">📍 50.0877, 14.4205</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#4</span>
+      <h3>Prague Castle</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Prague%20Castle%20Prague" alt="Prague Castle in Prague">
+    <p>The Prague Castle is a stunning example of medieval architecture, and is one of the largest and most historic castles in the world. The castle is located on a hill overlooking the city, and features a variety of beautiful buildings, including the St. Vitus Cathedral and the Old Royal Palace. Visitors can take a guided tour of the castle, and explore the many museums, galleries, and historical landmarks that are located within the castle complex. The castle is also a great place to learn about the history and culture of Prague, and to see some of the beautiful artwork and architecture that the city is known for. The castle is a must-see attraction for anyone visiting Prague, and is a great place to experience the city's rich history and culture.</p>
+    <p class="coords">📍 50.0911, 14.4011</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#5</span>
+      <h3>The Astronomical Clock</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Astronomical%20Clock%20Prague" alt="The Astronomical Clock in Prague">
+    <p>The Astronomical Clock is a stunning example of medieval engineering, and is one of the most famous landmarks in Prague. The clock is located in the Old Town Square, and features a beautiful and intricate mechanism that shows the position of the sun, moon, and stars. Visitors can watch the clock in action, and learn about its history and significance. The clock is also a great place to take photos, and to enjoy the street performers and vendors that line the square. The Astronomical Clock is a must-see attraction for anyone visiting Prague, and is a great place to experience the city's rich history and culture. The clock is also a great place to learn about the science and technology of the medieval period, and to see some of the beautiful artwork and architecture that Prague is known for.</p>
+    <p class="coords">📍 50.0878, 14.4206</p>
+  </li>
+</ul>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <h2>Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    Generated automatically with AI + n8n.
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const attractions = [{"name":"Charles Bridge","shortDescription":"The Charles Bridge is a iconic landmark in Prague, known for its stunning Gothic architecture and beautiful statues. The bridge is lined with 30 statues of saints and other notable figures, and offers breathtaking views of the Vltava River and the city. Visitors can walk across the bridge, taking in the sights and sounds of the city, and enjoy the street performers and vendors that line the bridge. The bridge is particularly beautiful at night, when it is illuminated by thousands of lights. The Charles Bridge is a must-see attraction for anyone visiting Prague, and is a great place to start a tour of the city.","lat":50.0865,"lng":14.4123},{"name":"St. Vitus Cathedral","shortDescription":"The St. Vitus Cathedral is a stunning example of Gothic architecture, and is one of the most beautiful and historic landmarks in Prague. The cathedral is located within the Prague Castle complex, and features intricate stone carvings, stunning stained glass windows, and a beautiful interior. Visitors can take a guided tour of the cathedral, and climb to the top of the tower for breathtaking views of the city. The cathedral is a significant cultural and historical landmark, and is a must-see attraction for anyone visiting Prague. The cathedral is also a great place to learn about the history and culture of the city, and to see some of the beautiful artwork and architecture that Prague is known for.","lat":50.0909,"lng":14.4014},{"name":"Old Town Square","shortDescription":"The Old Town Square is the heart of Prague's historic district, and is a bustling hub of activity and entertainment. The square is home to many of the city's most famous landmarks, including the Astronomical Clock and the Church of Our Lady Before Týn. Visitors can walk through the square, taking in the sights and sounds of the city, and enjoy the street performers, vendors, and cafes that line the square. The square is also a great place to try some of the local cuisine, and to shop for souvenirs and other items. The Old Town Square is a must-see attraction for anyone visiting Prague, and is a great place to experience the city's vibrant atmosphere and culture.","lat":50.0877,"lng":14.4205},{"name":"Prague Castle","shortDescription":"The Prague Castle is a stunning example of medieval architecture, and is one of the largest and most historic castles in the world. The castle is located on a hill overlooking the city, and features a variety of beautiful buildings, including the St. Vitus Cathedral and the Old Royal Palace. Visitors can take a guided tour of the castle, and explore the many museums, galleries, and historical landmarks that are located within the castle complex. The castle is also a great place to learn about the history and culture of Prague, and to see some of the beautiful artwork and architecture that the city is known for. The castle is a must-see attraction for anyone visiting Prague, and is a great place to experience the city's rich history and culture.","lat":50.0911,"lng":14.4011},{"name":"The Astronomical Clock","shortDescription":"The Astronomical Clock is a stunning example of medieval engineering, and is one of the most famous landmarks in Prague. The clock is located in the Old Town Square, and features a beautiful and intricate mechanism that shows the position of the sun, moon, and stars. Visitors can watch the clock in action, and learn about its history and significance. The clock is also a great place to take photos, and to enjoy the street performers and vendors that line the square. The Astronomical Clock is a must-see attraction for anyone visiting Prague, and is a great place to experience the city's rich history and culture. The clock is also a great place to learn about the science and technology of the medieval period, and to see some of the beautiful artwork and architecture that Prague is known for.","lat":50.0878,"lng":14.4206}];
+
+    const map = L.map('map').setView([50.0865, 14.4123], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    attractions.forEach(a => {
+      if (typeof a.lat === "number" && typeof a.lng === "number") {
+        L.marker([a.lat, a.lng]).addTo(map)
+          .bindPopup('<b>' + a.name + '</b><br/>' + a.shortDescription);
+      }
+    });
+  </script>
+</body>
+</html>
