@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Visit Tel Aviv</title>
+
+  <!-- Leaflet CSS (map library) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    :root { --bg:#0b1220; --card:#121b2f; --text:#e8edf7; --muted:#a8b3cf; --accent:#7c5cff; }
+    body{
+      margin:0;
+      font-family:system-ui, Arial;
+      background:linear-gradient(180deg,#0b1220,#0a0f1c);
+      color:var(--text);
+    }
+    header{ padding:28px 20px; max-width:1100px; margin:0 auto; }
+    .title{ font-size:34px; margin:0 0 8px; }
+    .subtitle{ color:var(--muted); margin:0; line-height:1.5; }
+
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 28px;
+      display:grid;
+      gap:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    h2{ margin:0 0 10px; font-size:20px; }
+    ul{ list-style:none; padding:0; margin:0; display:grid; gap:16px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card-head{ display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+    .badge{
+      background:rgba(124,92,255,0.2);
+      border:1px solid rgba(124,92,255,0.35);
+      color:#dcd6ff;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .card-image{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-bottom:8px;
+    }
+    .coords{ color:var(--muted); font-size:12px; margin:10px 0 0; }
+
+    #map{ height:420px; border-radius:16px; overflow:hidden; }
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 30px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Visit Tel Aviv</h1>
+    <p class="subtitle">Tel Aviv, a vibrant city located on the Mediterranean coast of Israel, offers a unique blend of ancient history, cultural attractions, and modern entertainment. With its stunning beaches, world-class museums, and lively nightlife, Tel Aviv is a must-visit destination for any traveler. From the historic port of Jaffa to the trendy neighborhoods of Neve Tzedek and Florentin, Tel Aviv has something for everyone.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Attractions list with images -->
+    <div class="section">
+      <h2>Top attractions</h2>
+      <ul>
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#1</span>
+      <h3>Tel Aviv Beach</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Tel%20Aviv%20Beach%20Israel" alt="Tel Aviv Beach in Tel Aviv">
+    <p>The Tel Aviv Beach is a stunning stretch of coastline that offers a perfect blend of relaxation and recreation. With its warm sandy shores, crystal-clear waters, and picturesque views of the Mediterranean Sea, the beach is a popular spot for both locals and tourists. Visitors can soak up the sun, take a refreshing swim, or enjoy a variety of water sports, such as surfing, kayaking, or paddleboarding. The beach is also lined with a range of restaurants, cafes, and bars, offering a wide range of delicious food and drinks. Whether you're looking to unwind, get active, or simply enjoy the stunning scenery, the Tel Aviv Beach is an absolute must-visit.</p>
+    <p class="coords">📍 32.0711, 34.7673</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#2</span>
+      <h3>Jaffa Old City</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Jaffa%20Old%20City%20Tel%20Aviv" alt="Jaffa Old City in Tel Aviv">
+    <p>The Jaffa Old City is a historic and charming neighborhood that offers a glimpse into the rich history and culture of Tel Aviv. With its narrow streets, picturesque alleys, and stunning architecture, the Old City is a popular spot for both locals and tourists. Visitors can explore the ancient ruins, visit the historic churches and mosques, and browse the range of boutique shops, galleries, and restaurants. The Old City is also home to a range of cultural attractions, including the Jaffa Museum, the Ilana Goor Museum, and the Jaffa Theatre. Whether you're interested in history, culture, or simply want to experience the unique atmosphere of the Old City, Jaffa is a must-visit destination.</p>
+    <p class="coords">📍 32.0553, 34.7633</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#3</span>
+      <h3>Carmel Market</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Carmel%20Market%20Tel%20Aviv" alt="Carmel Market in Tel Aviv">
+    <p>The Carmel Market, also known as the Shuk HaCarmel, is a vibrant and bustling marketplace that offers a wide range of fresh produce, spices, and souvenirs. With its colorful stalls, lively atmosphere, and friendly vendors, the market is a popular spot for both locals and tourists. Visitors can sample a range of delicious foods, including fresh fruits, vegetables, and baked goods, as well as browse the range of unique gifts and souvenirs. The market is also a great place to experience the local culture and meet the friendly people of Tel Aviv. Whether you're looking for a taste of the local cuisine, a unique souvenir, or simply want to soak up the lively atmosphere, the Carmel Market is a must-visit destination.</p>
+    <p class="coords">📍 32.0639, 34.7692</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#4</span>
+      <h3>Tel Aviv Museum of Art</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Tel%20Aviv%20Museum%20of%20Art%20Israel" alt="Tel Aviv Museum of Art in Tel Aviv">
+    <p>The Tel Aviv Museum of Art is a world-class museum that features a wide range of modern and contemporary art from around the world. With its stunning architecture, beautiful gardens, and impressive collection of artworks, the museum is a must-visit destination for any art lover. Visitors can explore the range of exhibitions, including works by famous artists such as Picasso, Matisse, and Warhol, as well as discover the works of local and emerging artists. The museum also offers a range of educational programs, workshops, and events, making it a great place to learn about art and culture. Whether you're an art enthusiast, a student, or simply looking for a unique and inspiring experience, the Tel Aviv Museum of Art is a must-visit.</p>
+    <p class="coords">📍 32.0773, 34.7867</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#5</span>
+      <h3>Neve Tzedek Neighborhood</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Neve%20Tzedek%20Neighborhood%20Tel%20Aviv" alt="Neve Tzedek Neighborhood in Tel Aviv">
+    <p>The Neve Tzedek Neighborhood is a charming and historic area that offers a unique glimpse into the early days of Tel Aviv. With its picturesque streets, beautiful architecture, and stunning gardens, the neighborhood is a popular spot for both locals and tourists. Visitors can explore the range of boutique shops, galleries, and restaurants, as well as visit the historic sites, including the Neve Tzedek Museum and the Suzanne Dellal Centre. The neighborhood is also home to a range of cultural attractions, including the Neve Tzedek Theatre and the Israeli Opera. Whether you're interested in history, culture, or simply want to experience the unique atmosphere of the neighborhood, Neve Tzedek is a must-visit destination.</p>
+    <p class="coords">📍 32.0611, 34.7644</p>
+  </li>
+</ul>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <h2>Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    Generated automatically with AI + n8n.
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const attractions = [{"name":"Tel Aviv Beach","shortDescription":"The Tel Aviv Beach is a stunning stretch of coastline that offers a perfect blend of relaxation and recreation. With its warm sandy shores, crystal-clear waters, and picturesque views of the Mediterranean Sea, the beach is a popular spot for both locals and tourists. Visitors can soak up the sun, take a refreshing swim, or enjoy a variety of water sports, such as surfing, kayaking, or paddleboarding. The beach is also lined with a range of restaurants, cafes, and bars, offering a wide range of delicious food and drinks. Whether you're looking to unwind, get active, or simply enjoy the stunning scenery, the Tel Aviv Beach is an absolute must-visit.","lat":32.0711,"lng":34.7673},{"name":"Jaffa Old City","shortDescription":"The Jaffa Old City is a historic and charming neighborhood that offers a glimpse into the rich history and culture of Tel Aviv. With its narrow streets, picturesque alleys, and stunning architecture, the Old City is a popular spot for both locals and tourists. Visitors can explore the ancient ruins, visit the historic churches and mosques, and browse the range of boutique shops, galleries, and restaurants. The Old City is also home to a range of cultural attractions, including the Jaffa Museum, the Ilana Goor Museum, and the Jaffa Theatre. Whether you're interested in history, culture, or simply want to experience the unique atmosphere of the Old City, Jaffa is a must-visit destination.","lat":32.0553,"lng":34.7633},{"name":"Carmel Market","shortDescription":"The Carmel Market, also known as the Shuk HaCarmel, is a vibrant and bustling marketplace that offers a wide range of fresh produce, spices, and souvenirs. With its colorful stalls, lively atmosphere, and friendly vendors, the market is a popular spot for both locals and tourists. Visitors can sample a range of delicious foods, including fresh fruits, vegetables, and baked goods, as well as browse the range of unique gifts and souvenirs. The market is also a great place to experience the local culture and meet the friendly people of Tel Aviv. Whether you're looking for a taste of the local cuisine, a unique souvenir, or simply want to soak up the lively atmosphere, the Carmel Market is a must-visit destination.","lat":32.0639,"lng":34.7692},{"name":"Tel Aviv Museum of Art","shortDescription":"The Tel Aviv Museum of Art is a world-class museum that features a wide range of modern and contemporary art from around the world. With its stunning architecture, beautiful gardens, and impressive collection of artworks, the museum is a must-visit destination for any art lover. Visitors can explore the range of exhibitions, including works by famous artists such as Picasso, Matisse, and Warhol, as well as discover the works of local and emerging artists. The museum also offers a range of educational programs, workshops, and events, making it a great place to learn about art and culture. Whether you're an art enthusiast, a student, or simply looking for a unique and inspiring experience, the Tel Aviv Museum of Art is a must-visit.","lat":32.0773,"lng":34.7867},{"name":"Neve Tzedek Neighborhood","shortDescription":"The Neve Tzedek Neighborhood is a charming and historic area that offers a unique glimpse into the early days of Tel Aviv. With its picturesque streets, beautiful architecture, and stunning gardens, the neighborhood is a popular spot for both locals and tourists. Visitors can explore the range of boutique shops, galleries, and restaurants, as well as visit the historic sites, including the Neve Tzedek Museum and the Suzanne Dellal Centre. The neighborhood is also home to a range of cultural attractions, including the Neve Tzedek Theatre and the Israeli Opera. Whether you're interested in history, culture, or simply want to experience the unique atmosphere of the neighborhood, Neve Tzedek is a must-visit destination.","lat":32.0611,"lng":34.7644}];
+
+    const map = L.map('map').setView([32.0711, 34.7673], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    attractions.forEach(a => {
+      if (typeof a.lat === "number" && typeof a.lng === "number") {
+        L.marker([a.lat, a.lng]).addTo(map)
+          .bindPopup('<b>' + a.name + '</b><br/>' + a.shortDescription);
+      }
+    });
+  </script>
+</body>
+</html>
