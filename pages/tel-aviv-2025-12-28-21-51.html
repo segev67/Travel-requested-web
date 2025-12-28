@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visit Tel Aviv</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+  integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+  crossorigin=""/>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: #f5f5f5;
+    }
+    .hero {
+      height: 50vh;
+      width: 100%;
+      object-fit: cover;
+      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+      color: #fff;
+      padding: 2rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+    .card {
+      background-color: #fff;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .card img {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 12px 12px 0 0;
+    }
+    .card h3 {
+      margin-top: 0;
+    }
+    .local-tips {
+      background-color: #f0f0f0;
+      padding: 1rem;
+      border-radius: 12px;
+    }
+    #map {
+      height: 350px;
+      border-radius: 12px;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero" style="background-image: url(https://loremflickr.com/800/600/Tel Aviv,beach/all)">
+    <h1>Visit Tel Aviv</h1>
+    <p>Beachfront energy meets urban culture</p>
+  </section>
+  <section style="padding: 2rem">
+    <p>Tel Aviv is a vibrant city that offers a unique blend of beachfront relaxation and urban culture. It's perfect for couples and solo travelers looking for a mix of relaxation and nightlife.</p>
+    <p>From the beautiful beaches to the lively pubs, Tel Aviv has something for everyone. Whether you're looking to soak up the sun, explore the city's history, or dance the night away, Tel Aviv is the perfect destination.</p>
+  </section>
+  <section style="padding: 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem">
+    <div class="card">
+      <img src="https://loremflickr.com/800/600/Tel Aviv,beach/all" alt="Tel Aviv Beach">
+      <h3>Tel Aviv Beach</h3>
+      <p>Tel Aviv Beach is one of the most popular beaches in the city, known for its soft white sand and crystal-clear waters. It's the perfect spot to relax and soak up the sun. Travelers can enjoy a variety of water sports, such as surfing and paddleboarding. The beach is also lined with restaurants and bars, offering a range of food and drink options. For the best experience, visit the beach early in the morning or late in the evening to avoid the crowds.</p>
+    </div>
+    <div class="card">
+      <img src="https://loremflickr.com/800/600/Tel Aviv,pub/all" alt="Tel Aviv Pub">
+      <h3>Tel Aviv Pub</h3>
+      <p>Tel Aviv Pub is a popular spot for nightlife, offering a range of beers and cocktails. It's a great place to meet new people and enjoy live music and DJs. The pub is located in the heart of the city, making it easy to get to and from. Travelers can enjoy a variety of pub games, such as pool and foosball. For the best experience, visit the pub on a Friday night, when it's busiest and most lively.</p>
+    </div>
+    <div class="card">
+      <img src="https://loremflickr.com/800/600/Tel Aviv,bar/all" alt="Tel Aviv Bar">
+      <h3>Tel Aviv Bar</h3>
+      <p>Tel Aviv Bar is a stylish and modern bar, offering a range of cocktails and wines. It's a great place to relax and enjoy a drink after a long day. The bar is located in a trendy neighborhood, making it a great spot to explore. Travelers can enjoy a variety of small plates and snacks, such as tapas and appetizers. For the best experience, visit the bar during happy hour, when drinks are discounted.</p>
+    </div>
+  </section>
+  <section class="local-tips" style="padding: 2rem">
+    <h3>Local Tips</h3>
+    <ul>
+      <li>Best time to visit: Spring and autumn are the best times to visit Tel Aviv, when the weather is mild and pleasant.</li>
+      <li>Transportation: The best way to get around Tel Aviv is by bus or taxi, as the city has a comprehensive public transportation system.</li>
+      <li>Money-saving tip: Try to avoid eating at touristy restaurants, and instead opt for local eateries and street food, which are often cheaper and more delicious.</li>
+    </ul>
+  </section>
+  <div id="map"></div>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+  integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+  crossorigin=""></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var map = L.map('map').setView([32.0853, 34.7818], 13);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+        subdomains: ['a', 'b', 'c']
+      }).addTo(map);
+      var marker1 = L.marker([32.0853, 34.7818]).addTo(map).bindPopup('<strong>Tel Aviv Beach</strong><br/>A popular beach in the city');
+      var marker2 = L.marker([32.0733, 34.7853]).addTo(map).bindPopup('<strong>Tel Aviv Pub</strong><br/>A popular spot for nightlife');
+      var marker3 = L.marker([32.0653, 34.7753]).addTo(map).bindPopup('<strong>Tel Aviv Bar</strong><br/>A stylish and modern bar');
+    });
+  </script>
+</body>
+</html>
