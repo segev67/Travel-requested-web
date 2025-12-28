@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Visit Prague</title>
+
+  <!-- Leaflet CSS (map library) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    :root { --bg:#0b1220; --card:#121b2f; --text:#e8edf7; --muted:#a8b3cf; --accent:#7c5cff; }
+    body{
+      margin:0;
+      font-family:system-ui, Arial;
+      background:linear-gradient(180deg,#0b1220,#0a0f1c);
+      color:var(--text);
+    }
+    header{ padding:28px 20px; max-width:1100px; margin:0 auto; }
+    .title{ font-size:34px; margin:0 0 8px; }
+    .subtitle{ color:var(--muted); margin:0; line-height:1.5; }
+
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 28px;
+      display:grid;
+      gap:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    h2{ margin:0 0 10px; font-size:20px; }
+    ul{ list-style:none; padding:0; margin:0; display:grid; gap:16px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card-head{ display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+    .badge{
+      background:rgba(124,92,255,0.2);
+      border:1px solid rgba(124,92,255,0.35);
+      color:#dcd6ff;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .card-image{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-bottom:8px;
+    }
+    .coords{ color:var(--muted); font-size:12px; margin:10px 0 0; }
+
+    #map{ height:420px; border-radius:16px; overflow:hidden; }
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 30px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Visit Prague</h1>
+    <p class="subtitle">Prague is the capital city of the Czech Republic, known for its rich history, cultural landmarks, and vibrant atmosphere. The city is filled with stunning architecture, from Gothic to Art Nouveau, and offers a wide range of activities for visitors. From exploring the historic Old Town to visiting the famous Charles Bridge, Prague has something for everyone.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Attractions list with images -->
+    <div class="section">
+      <h2>Top attractions</h2>
+      <ul>
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#1</span>
+      <h3>Charles Bridge</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Charles%20Bridge%20Prague" alt="Charles Bridge in Prague">
+    <p>Charles Bridge is a historic pedestrian bridge that spans the Vltava River, offering breathtaking views of the city. The bridge is adorned with statues and offers a unique glimpse into the city's rich history. Visitors can walk across the bridge, taking in the sights and sounds of the city, and enjoy the street performers and vendors that line the bridge. The bridge is particularly beautiful at night, when it is illuminated and takes on a magical quality. As one of the most famous landmarks in Prague, Charles Bridge is a must-visit attraction for anyone traveling to the city.</p>
+    <p class="coords">📍 50.08677, 14.41587</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#2</span>
+      <h3>Old Town Square</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Old%20Town%20Square%20Prague" alt="Old Town Square in Prague">
+    <p>Old Town Square is the heart of Prague's historic district, filled with stunning architecture, lively atmosphere, and rich history. The square is home to the famous Astronomical Clock, which dates back to the 15th century and is a marvel of medieval engineering. Visitors can also explore the nearby churches, museums, and shops, and enjoy the street performers and food vendors that fill the square. The square is particularly beautiful during the holiday season, when it is decorated with lights and Christmas markets. As one of the most historic and culturally significant areas of the city, Old Town Square is a must-visit destination for anyone traveling to Prague.</p>
+    <p class="coords">📍 50.08774, 14.42056</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#3</span>
+      <h3>Prague Castle</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Prague%20Castle%20Prague" alt="Prague Castle in Prague">
+    <p>Prague Castle is a vast complex of palaces, churches, and gardens that dominates the city's skyline. The castle has a long and storied history, dating back to the 9th century, and has been the seat of power for various rulers and dynasties over the centuries. Visitors can explore the castle's many buildings, including the stunning St. Vitus Cathedral, and take in the breathtaking views of the city from the castle's walls. The castle is also home to several museums and galleries, showcasing the city's rich history and cultural heritage. As one of the largest and most historic castles in the world, Prague Castle is an absolute must-visit attraction for anyone traveling to the city.</p>
+    <p class="coords">📍 50.09111, 14.40139</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#4</span>
+      <h3>Wenceslas Square</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Wenceslas%20Square%20Prague" alt="Wenceslas Square in Prague">
+    <p>Wenceslas Square is one of the most famous and historic squares in Prague, known for its stunning architecture, lively atmosphere, and rich cultural heritage. The square is dominated by the imposing National Museum, which houses a vast collection of artifacts and exhibits showcasing the country's history and culture. Visitors can also explore the nearby shops, cafes, and restaurants, and take in the sights and sounds of the city. The square is particularly beautiful at night, when it is illuminated and takes on a magical quality. As one of the most iconic and culturally significant areas of the city, Wenceslas Square is a must-visit destination for anyone traveling to Prague.</p>
+    <p class="coords">📍 50.07889, 14.42944</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#5</span>
+      <h3>St. Nicholas Church</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=St.%20Nicholas%20Church%20Prague" alt="St. Nicholas Church in Prague">
+    <p>St. Nicholas Church is a stunning Baroque church located in the heart of Prague's Old Town, known for its breathtaking architecture and rich cultural heritage. The church was built in the 18th century and features a stunning interior, with intricate carvings, ornate decorations, and beautiful stained glass windows. Visitors can attend a concert or mass at the church, and take in the stunning views of the city from the church's tower. The church is also home to a small museum, showcasing the history and significance of the church and its surroundings. As one of the most beautiful and historic churches in Prague, St. Nicholas Church is a must-visit attraction for anyone traveling to the city.</p>
+    <p class="coords">📍 50.08765, 14.41917</p>
+  </li>
+</ul>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <h2>Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    Generated automatically with AI + n8n.
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const attractions = [{"name":"Charles Bridge","shortDescription":"Charles Bridge is a historic pedestrian bridge that spans the Vltava River, offering breathtaking views of the city. The bridge is adorned with statues and offers a unique glimpse into the city's rich history. Visitors can walk across the bridge, taking in the sights and sounds of the city, and enjoy the street performers and vendors that line the bridge. The bridge is particularly beautiful at night, when it is illuminated and takes on a magical quality. As one of the most famous landmarks in Prague, Charles Bridge is a must-visit attraction for anyone traveling to the city.","lat":50.08677,"lng":14.41587},{"name":"Old Town Square","shortDescription":"Old Town Square is the heart of Prague's historic district, filled with stunning architecture, lively atmosphere, and rich history. The square is home to the famous Astronomical Clock, which dates back to the 15th century and is a marvel of medieval engineering. Visitors can also explore the nearby churches, museums, and shops, and enjoy the street performers and food vendors that fill the square. The square is particularly beautiful during the holiday season, when it is decorated with lights and Christmas markets. As one of the most historic and culturally significant areas of the city, Old Town Square is a must-visit destination for anyone traveling to Prague.","lat":50.08774,"lng":14.42056},{"name":"Prague Castle","shortDescription":"Prague Castle is a vast complex of palaces, churches, and gardens that dominates the city's skyline. The castle has a long and storied history, dating back to the 9th century, and has been the seat of power for various rulers and dynasties over the centuries. Visitors can explore the castle's many buildings, including the stunning St. Vitus Cathedral, and take in the breathtaking views of the city from the castle's walls. The castle is also home to several museums and galleries, showcasing the city's rich history and cultural heritage. As one of the largest and most historic castles in the world, Prague Castle is an absolute must-visit attraction for anyone traveling to the city.","lat":50.09111,"lng":14.40139},{"name":"Wenceslas Square","shortDescription":"Wenceslas Square is one of the most famous and historic squares in Prague, known for its stunning architecture, lively atmosphere, and rich cultural heritage. The square is dominated by the imposing National Museum, which houses a vast collection of artifacts and exhibits showcasing the country's history and culture. Visitors can also explore the nearby shops, cafes, and restaurants, and take in the sights and sounds of the city. The square is particularly beautiful at night, when it is illuminated and takes on a magical quality. As one of the most iconic and culturally significant areas of the city, Wenceslas Square is a must-visit destination for anyone traveling to Prague.","lat":50.07889,"lng":14.42944},{"name":"St. Nicholas Church","shortDescription":"St. Nicholas Church is a stunning Baroque church located in the heart of Prague's Old Town, known for its breathtaking architecture and rich cultural heritage. The church was built in the 18th century and features a stunning interior, with intricate carvings, ornate decorations, and beautiful stained glass windows. Visitors can attend a concert or mass at the church, and take in the stunning views of the city from the church's tower. The church is also home to a small museum, showcasing the history and significance of the church and its surroundings. As one of the most beautiful and historic churches in Prague, St. Nicholas Church is a must-visit attraction for anyone traveling to the city.","lat":50.08765,"lng":14.41917}];
+
+    const map = L.map('map').setView([50.08677, 14.41587], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    attractions.forEach(a => {
+      if (typeof a.lat === "number" && typeof a.lng === "number") {
+        L.marker([a.lat, a.lng]).addTo(map)
+          .bindPopup('<b>' + a.name + '</b><br/>' + a.shortDescription);
+      }
+    });
+  </script>
+</body>
+</html>
