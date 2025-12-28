@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Visit Tel Aviv</title>
+
+  <!-- Leaflet CSS (map library) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    :root { --bg:#0b1220; --card:#121b2f; --text:#e8edf7; --muted:#a8b3cf; --accent:#7c5cff; }
+    body{
+      margin:0;
+      font-family:system-ui, Arial;
+      background:linear-gradient(180deg,#0b1220,#0a0f1c);
+      color:var(--text);
+    }
+    header{ padding:28px 20px; max-width:1100px; margin:0 auto; }
+    .title{ font-size:34px; margin:0 0 8px; }
+    .subtitle{ color:var(--muted); margin:0; line-height:1.5; }
+
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 28px;
+      display:grid;
+      gap:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    h2{ margin:0 0 10px; font-size:20px; }
+    ul{ list-style:none; padding:0; margin:0; display:grid; gap:16px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card-head{ display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+    .badge{
+      background:rgba(124,92,255,0.2);
+      border:1px solid rgba(124,92,255,0.35);
+      color:#dcd6ff;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .card-image{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-bottom:8px;
+    }
+    .coords{ color:var(--muted); font-size:12px; margin:10px 0 0; }
+
+    #map{ height:420px; border-radius:16px; overflow:hidden; }
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 30px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Visit Tel Aviv</h1>
+    <p class="subtitle">Since the location is empty, we cannot provide a specific description. Generally, travel guides offer an overview of a city or country, including its culture, history, and attractions. A well-crafted guide helps travelers plan their trip and make the most of their time.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Attractions list with images -->
+    <div class="section">
+      <h2>Top attractions</h2>
+      <ul>
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#1</span>
+      <h3>Generic Attraction 1</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Generic%20Landmark%20Empty%20Location" alt="Generic Attraction 1 in Tel Aviv">
+    <p>This attraction would typically be a famous landmark or a popular destination within the given location. Without a specific location, we cannot provide detailed information. Usually, such attractions have a rich history, stunning architecture, or breathtaking natural beauty. Visitors often flock to these sites to experience their grandeur and take memorable photos. The surrounding area might also offer a range of amenities, including restaurants, shops, and accommodations.</p>
+    <p class="coords">📍 0, 0</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#2</span>
+      <h3>Generic Attraction 2</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Museum%20Empty%20Location" alt="Generic Attraction 2 in Tel Aviv">
+    <p>Another significant attraction in any given location could be a museum, showcasing the local art, history, or science. These institutions provide valuable insights into the location's past, its people, and their achievements. Exhibits are often interactive, allowing visitors to engage with the content on a deeper level. The buildings themselves can be works of art, with impressive designs that reflect the location's architectural style. Visitors can spend hours exploring the various galleries and learning something new.</p>
+    <p class="coords">📍 0, 0</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#3</span>
+      <h3>Generic Attraction 3</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Park%20Empty%20Location" alt="Generic Attraction 3 in Tel Aviv">
+    <p>Parks and gardens are also popular attractions, offering a peaceful escape from the hustle and bustle of city life. These green spaces can be home to a variety of flora and fauna, with walking trails, lakes, and picnic areas. Visitors can enjoy a leisurely stroll, a boat ride, or simply sit and relax in a serene environment. Many parks also host cultural events and festivals, making them vibrant community hubs. The opportunity to connect with nature and local culture makes these attractions truly special.</p>
+    <p class="coords">📍 0, 0</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#4</span>
+      <h3>Generic Attraction 4</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Historical%20Site%20Empty%20Location" alt="Generic Attraction 4 in Tel Aviv">
+    <p>Historical sites are often a major draw for travelers, providing a glimpse into the location's past. These could be ancient ruins, castles, or other significant buildings that have played a crucial role in shaping the location's history. Visitors can explore the sites, learning about the events and people that have contributed to the location's heritage. Guided tours are usually available, offering in-depth information and insights that bring the history to life. The experience can be both educational and entertaining, leaving a lasting impression on visitors.</p>
+    <p class="coords">📍 0, 0</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#5</span>
+      <h3>Generic Attraction 5</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Market%20Empty%20Location" alt="Generic Attraction 5 in Tel Aviv">
+    <p>For those interested in local cuisine, a visit to a market or a food tour can be a highlight of their trip. These attractions allow visitors to sample a variety of dishes, drinks, and delicacies that are unique to the location. The opportunity to interact with local vendors, chefs, and food enthusiasts adds a social dimension to the experience. Markets and food tours also provide a chance to learn about the ingredients, cooking methods, and cultural traditions behind the local cuisine. This immersive experience can be a delicious way to explore the location's culture.</p>
+    <p class="coords">📍 0, 0</p>
+  </li>
+</ul>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <h2>Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    Generated automatically with AI + n8n.
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const attractions = [{"name":"Generic Attraction 1","shortDescription":"This attraction would typically be a famous landmark or a popular destination within the given location. Without a specific location, we cannot provide detailed information. Usually, such attractions have a rich history, stunning architecture, or breathtaking natural beauty. Visitors often flock to these sites to experience their grandeur and take memorable photos. The surrounding area might also offer a range of amenities, including restaurants, shops, and accommodations.","lat":0,"lng":0},{"name":"Generic Attraction 2","shortDescription":"Another significant attraction in any given location could be a museum, showcasing the local art, history, or science. These institutions provide valuable insights into the location's past, its people, and their achievements. Exhibits are often interactive, allowing visitors to engage with the content on a deeper level. The buildings themselves can be works of art, with impressive designs that reflect the location's architectural style. Visitors can spend hours exploring the various galleries and learning something new.","lat":0,"lng":0},{"name":"Generic Attraction 3","shortDescription":"Parks and gardens are also popular attractions, offering a peaceful escape from the hustle and bustle of city life. These green spaces can be home to a variety of flora and fauna, with walking trails, lakes, and picnic areas. Visitors can enjoy a leisurely stroll, a boat ride, or simply sit and relax in a serene environment. Many parks also host cultural events and festivals, making them vibrant community hubs. The opportunity to connect with nature and local culture makes these attractions truly special.","lat":0,"lng":0},{"name":"Generic Attraction 4","shortDescription":"Historical sites are often a major draw for travelers, providing a glimpse into the location's past. These could be ancient ruins, castles, or other significant buildings that have played a crucial role in shaping the location's history. Visitors can explore the sites, learning about the events and people that have contributed to the location's heritage. Guided tours are usually available, offering in-depth information and insights that bring the history to life. The experience can be both educational and entertaining, leaving a lasting impression on visitors.","lat":0,"lng":0},{"name":"Generic Attraction 5","shortDescription":"For those interested in local cuisine, a visit to a market or a food tour can be a highlight of their trip. These attractions allow visitors to sample a variety of dishes, drinks, and delicacies that are unique to the location. The opportunity to interact with local vendors, chefs, and food enthusiasts adds a social dimension to the experience. Markets and food tours also provide a chance to learn about the ingredients, cooking methods, and cultural traditions behind the local cuisine. This immersive experience can be a delicious way to explore the location's culture.","lat":0,"lng":0}];
+
+    const map = L.map('map').setView([0, 0], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    attractions.forEach(a => {
+      if (typeof a.lat === "number" && typeof a.lng === "number") {
+        L.marker([a.lat, a.lng]).addTo(map)
+          .bindPopup('<b>' + a.name + '</b><br/>' + a.shortDescription);
+      }
+    });
+  </script>
+</body>
+</html>
