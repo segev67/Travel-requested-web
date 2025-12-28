@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visit Tel Aviv</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+  integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+  crossorigin=""/>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: #f7f7f7;
+      padding: 0;
+      margin: 0;
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+    .hero {
+      height: 50vh;
+      width: 100%;
+      object-fit: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+    }
+    .card {
+      border-radius: 12px;
+      padding: 1rem;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .card img {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 12px 12px 0 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .local-tips {
+      background-color: #f2f2f2;
+      padding: 1rem;
+      border-radius: 12px;
+    }
+    #map {
+      height: 350px;
+      border-radius: 12px;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero" style="background-image: url(https://loremflickr.com/800/600/Tel Aviv,beach/all)">
+    <h1>Visit Tel Aviv</h1>
+    <p>Beachfront energy meets urban culture</p>
+  </section>
+  <section style="padding: 2rem">
+    <p>Tel Aviv is a vibrant city that offers a unique blend of beachfront relaxation and urban excitement, perfect for couples and families looking for a mix of culture, history, and entertainment.</p>
+    <p>From its stunning beaches to its world-class museums and historic sites, Tel Aviv has something for everyone, making it an ideal destination for travelers of all interests.</p>
+  </section>
+  <section class="grid" style="padding: 2rem">
+    <div class="card">
+      <img src="https://loremflickr.com/800/600/Tel Aviv,market/all" alt="Carmel Market">
+      <h3>Carmel Market</h3>
+      <p>Carmel Market, also known as Shuk HaCarmel, is a bustling marketplace in the heart of Tel Aviv, offering a wide variety of fresh produce, spices, spices, and souvenirs.</p>
+      <p>Visitors can sample local delicacies, browse through the stalls, and soak up the lively atmosphere, making it a must-visit destination for foodies and shoppers alike.</p>
+      <p>The market is especially vibrant on Tuesdays and Fridays, when local farmers and artisans sell their wares, and visitors can enjoy the sights, sounds, and smells of the market.</p>
+      <p>For a unique experience, visit the market in the evening, when the stalls are closed, and the area is filled with street performers and live music.</p>
+      <p>Be sure to try some of the local specialties, such as falafel, shawarma, or knafeh, and don't forget to haggle with the vendors for the best prices.</p>
+    </div>
+    <div class="card">
+      <img src="https://loremflickr.com/800/600/Tel Aviv,beach/all" alt="Tel Aviv Beach">
+      <h3>Tel Aviv Beach</h3>
+      <p>Tel Aviv Beach is a stunning stretch of coastline that offers a relaxing getaway from the hustle and bustle of the city, with its soft white sand, crystal-clear waters, and picturesque views.</p>
+      <p>Visitors can soak up the sun, take a dip in the sea, or try their hand at water sports, such as surfing or paddleboarding, making it an ideal spot for beach lovers and adventure seekers.</p>
+      <p>The beach is especially popular during the summer months, when the weather is warm and sunny, and visitors can enjoy the vibrant atmosphere and lively events, such as beach parties and concerts.</p>
+      <p>For a unique experience, visit the beach at sunset, when the sky is painted with hues of pink and orange, and the atmosphere is filled with romance and tranquility.</p>
+      <p>Be sure to try some of the local seafood, such as fish or shrimp, and don't forget to take a stroll along the beachfront promenade, which offers stunning views of the city and the sea.</p>
+    </div>
+    <div class="card">
+      <img src="https://loremflickr.com/800/600/Tel Aviv,harbor/all" alt="Tel Aviv Harbor">
+      <h3>Tel Aviv Harbor</h3>
+      <p>Tel Aviv Harbor is a historic port that has been transformed into a vibrant entertainment district, offering a wide range of restaurants, bars, and clubs, as well as stunning views of the sea and the city skyline.</p>
+      <p>Visitors can take a leisurely stroll along the waterfront, enjoy a meal or drink at one of the many establishments, or try their hand at water sports, such as sailing or kayaking, making it an ideal spot for foodies and adventure seekers.</p>
+      <p>The harbor is especially popular during the evening hours, when the area is filled with live music and entertainment, and visitors can enjoy the vibrant atmosphere and stunning views.</p>
+      <p>For a unique experience, visit the harbor at night, when the area is illuminated with colorful lights and the atmosphere is filled with energy and excitement.</p>
+      <p>Be sure to try some of the local seafood, such as fish or shrimp, and don't forget to take a boat tour of the harbor, which offers stunning views of the city and the sea.</p>
+    </div>
+  </section>
+  <section style="padding: 2rem">
+    <div class="local-tips">
+      <h3>Local Tips</h3>
+      <ul>
+        <li>Best time to visit Tel Aviv is during the spring and autumn months, when the weather is mild and pleasant.</li>
+        <li>Use public transportation, such as buses or trains, to get around the city, as traffic can be heavy and parking can be difficult.</li>
+        <li>Try to learn some basic Hebrew phrases, such as "shalom" (hello) and "toda" (thank you), to show respect for the local culture and people.</li>
+      </ul>
+    </div>
+  </section>
+  <div id="map"></div>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+  integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+  crossorigin=""></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const map = L.map('map').setView([32.0853, 34.7818], 13);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+        subdomains: ['a', 'b', 'c']
+      }).addTo(map);
+      const attraction1 = L.marker([32.0731, 34.7693]).addTo(map).bindPopup('<strong>Carmel Market</strong><br/>A bustling marketplace in the heart of Tel Aviv');
+      const attraction2 = L.marker([32.0853, 34.7818]).addTo(map).bindPopup('<strong>Tel Aviv Beach</strong><br/>A stunning stretch of coastline with soft white sand and crystal-clear waters');
+      const attraction3 = L.marker([32.1042, 34.8067]).addTo(map).bindPopup('<strong>Tel Aviv Harbor</strong><br/>A historic port turned vibrant entertainment district with stunning views of the sea and city skyline');
+    });
+  </script>
+</body>
+</html>
