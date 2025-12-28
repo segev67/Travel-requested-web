@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Visit Tel Aviv</title>
+
+  <!-- Leaflet CSS (map library) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <style>
+    :root { --bg:#0b1220; --card:#121b2f; --text:#e8edf7; --muted:#a8b3cf; --accent:#7c5cff; }
+    body{
+      margin:0;
+      font-family:system-ui, Arial;
+      background:linear-gradient(180deg,#0b1220,#0a0f1c);
+      color:var(--text);
+    }
+    header{ padding:28px 20px; max-width:1100px; margin:0 auto; }
+    .title{ font-size:34px; margin:0 0 8px; }
+    .subtitle{ color:var(--muted); margin:0; line-height:1.5; }
+
+    .grid{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 28px;
+      display:grid;
+      gap:18px;
+    }
+
+    .section{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    h2{ margin:0 0 10px; font-size:20px; }
+    ul{ list-style:none; padding:0; margin:0; display:grid; gap:16px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card-head{ display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+    .badge{
+      background:rgba(124,92,255,0.2);
+      border:1px solid rgba(124,92,255,0.35);
+      color:#dcd6ff;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .card-image{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-bottom:8px;
+    }
+    .coords{ color:var(--muted); font-size:12px; margin:10px 0 0; }
+
+    #map{ height:420px; border-radius:16px; overflow:hidden; }
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 30px;
+      color:var(--muted);
+      font-size:12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Visit Tel Aviv</h1>
+    <p class="subtitle">Tel Aviv is a vibrant city located on the Mediterranean coast of Israel, known for its stunning beaches, rich history, and thriving cultural scene. Visitors can explore the city's historic neighborhoods, visit museums and art galleries, and enjoy the city's renowned nightlife. From ancient ruins to modern skyscrapers, Tel Aviv has something to offer for every interest and taste.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Attractions list with images -->
+    <div class="section">
+      <h2>Top attractions</h2>
+      <ul>
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#1</span>
+      <h3>Tel Aviv Beach</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Tel%20Aviv%20Beach%20Tel%20Aviv" alt="Tel Aviv Beach in Tel Aviv">
+    <p>Tel Aviv Beach is a must-visit destination for anyone looking to soak up the sun and enjoy the Mediterranean Sea. The beach offers a wide range of activities, including swimming, sunbathing, and water sports. Visitors can also take a stroll along the beachfront promenade, which is lined with cafes, restaurants, and shops. The beach is also a popular spot for people-watching and taking in the city's vibrant atmosphere. With its warm weather and beautiful scenery, Tel Aviv Beach is a great place to relax and unwind.</p>
+    <p class="coords">📍 32.0736, 34.7683</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#2</span>
+      <h3>Carmel Market</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Carmel%20Market%20Tel%20Aviv" alt="Carmel Market in Tel Aviv">
+    <p>The Carmel Market, also known as the Shuk HaCarmel, is a bustling marketplace that offers a wide range of goods, including fresh produce, spices, and souvenirs. Visitors can sample local delicacies, such as falafel and shawarma, and browse the stalls selling everything from handmade jewelry to traditional clothing. The market is a great place to experience the sights, sounds, and smells of Tel Aviv's vibrant culture. With its lively atmosphere and diverse offerings, the Carmel Market is a must-visit destination for anyone looking to experience the city's authentic flavor. The market is open every day, except for Saturdays, and is a great place to find unique gifts and mementos.</p>
+    <p class="coords">📍 32.0653, 34.7692</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#3</span>
+      <h3>White City</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=White%20City%20Tel%20Aviv" alt="White City in Tel Aviv">
+    <p>The White City is a UNESCO World Heritage Site that showcases Tel Aviv's unique architectural heritage. The area is characterized by its stunning collection of Bauhaus buildings, which were designed by German architects in the 1930s. Visitors can take a guided tour of the area and learn about the history and significance of the buildings, which are known for their clean lines, minimal ornamentation, and emphasis on functionality. The White City is a must-visit destination for anyone interested in architecture, design, or history. With its beautiful buildings and tranquil atmosphere, the White City is a great place to explore and learn about Tel Aviv's rich cultural heritage.</p>
+    <p class="coords">📍 32.0781, 34.7744</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#4</span>
+      <h3>Jaffa Port</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Jaffa%20Port%20Tel%20Aviv" alt="Jaffa Port in Tel Aviv">
+    <p>Jaffa Port is a historic port that has been in use for thousands of years, dating back to the ancient Phoenicians and Romans. Today, the port is a popular spot for tourists and locals alike, with its picturesque views, charming shops, and vibrant nightlife. Visitors can take a stroll along the waterfront, visit the ancient lighthouse, and enjoy the local seafood at one of the many restaurants. The port is also a great place to watch the sunset, with its stunning views of the Mediterranean Sea. With its rich history and lively atmosphere, Jaffa Port is a must-visit destination for anyone looking to experience the best of Tel Aviv.</p>
+    <p class="coords">📍 32.0544, 34.7508</p>
+  </li>
+
+  <li class="card">
+    <div class="card-head">
+      <span class="badge">#5</span>
+      <h3>Eretz Israel Museum</h3>
+    </div>
+    <img class="card-image" src="https://picsum.photos/480/280?random=Eretz%20Israel%20Museum%20Tel%20Aviv" alt="Eretz Israel Museum in Tel Aviv">
+    <p>The Eretz Israel Museum is a museum that showcases the history and culture of Israel, with a focus on the country's natural history, archaeology, and anthropology. The museum features a wide range of exhibits, including artifacts from ancient civilizations, displays on the country's flora and fauna, and interactive exhibits that explore the country's rich cultural heritage. Visitors can also explore the museum's beautiful gardens, which feature a variety of plants and trees native to Israel. With its engaging exhibits and beautiful surroundings, the Eretz Israel Museum is a great place to learn about Israel's history and culture. The museum is open every day, except for Mondays, and is a must-visit destination for anyone looking to deepen their understanding of the country.</p>
+    <p class="coords">📍 32.1008, 34.8011</p>
+  </li>
+</ul>
+    </div>
+
+    <!-- Map -->
+    <div class="section">
+      <h2>Map</h2>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    Generated automatically with AI + n8n.
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const attractions = [{"name":"Tel Aviv Beach","shortDescription":"Tel Aviv Beach is a must-visit destination for anyone looking to soak up the sun and enjoy the Mediterranean Sea. The beach offers a wide range of activities, including swimming, sunbathing, and water sports. Visitors can also take a stroll along the beachfront promenade, which is lined with cafes, restaurants, and shops. The beach is also a popular spot for people-watching and taking in the city's vibrant atmosphere. With its warm weather and beautiful scenery, Tel Aviv Beach is a great place to relax and unwind.","lat":32.0736,"lng":34.7683},{"name":"Carmel Market","shortDescription":"The Carmel Market, also known as the Shuk HaCarmel, is a bustling marketplace that offers a wide range of goods, including fresh produce, spices, and souvenirs. Visitors can sample local delicacies, such as falafel and shawarma, and browse the stalls selling everything from handmade jewelry to traditional clothing. The market is a great place to experience the sights, sounds, and smells of Tel Aviv's vibrant culture. With its lively atmosphere and diverse offerings, the Carmel Market is a must-visit destination for anyone looking to experience the city's authentic flavor. The market is open every day, except for Saturdays, and is a great place to find unique gifts and mementos.","lat":32.0653,"lng":34.7692},{"name":"White City","shortDescription":"The White City is a UNESCO World Heritage Site that showcases Tel Aviv's unique architectural heritage. The area is characterized by its stunning collection of Bauhaus buildings, which were designed by German architects in the 1930s. Visitors can take a guided tour of the area and learn about the history and significance of the buildings, which are known for their clean lines, minimal ornamentation, and emphasis on functionality. The White City is a must-visit destination for anyone interested in architecture, design, or history. With its beautiful buildings and tranquil atmosphere, the White City is a great place to explore and learn about Tel Aviv's rich cultural heritage.","lat":32.0781,"lng":34.7744},{"name":"Jaffa Port","shortDescription":"Jaffa Port is a historic port that has been in use for thousands of years, dating back to the ancient Phoenicians and Romans. Today, the port is a popular spot for tourists and locals alike, with its picturesque views, charming shops, and vibrant nightlife. Visitors can take a stroll along the waterfront, visit the ancient lighthouse, and enjoy the local seafood at one of the many restaurants. The port is also a great place to watch the sunset, with its stunning views of the Mediterranean Sea. With its rich history and lively atmosphere, Jaffa Port is a must-visit destination for anyone looking to experience the best of Tel Aviv.","lat":32.0544,"lng":34.7508},{"name":"Eretz Israel Museum","shortDescription":"The Eretz Israel Museum is a museum that showcases the history and culture of Israel, with a focus on the country's natural history, archaeology, and anthropology. The museum features a wide range of exhibits, including artifacts from ancient civilizations, displays on the country's flora and fauna, and interactive exhibits that explore the country's rich cultural heritage. Visitors can also explore the museum's beautiful gardens, which feature a variety of plants and trees native to Israel. With its engaging exhibits and beautiful surroundings, the Eretz Israel Museum is a great place to learn about Israel's history and culture. The museum is open every day, except for Mondays, and is a must-visit destination for anyone looking to deepen their understanding of the country.","lat":32.1008,"lng":34.8011}];
+
+    const map = L.map('map').setView([32.0736, 34.7683], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    attractions.forEach(a => {
+      if (typeof a.lat === "number" && typeof a.lng === "number") {
+        L.marker([a.lat, a.lng]).addTo(map)
+          .bindPopup('<b>' + a.name + '</b><br/>' + a.shortDescription);
+      }
+    });
+  </script>
+</body>
+</html>
